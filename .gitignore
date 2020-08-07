@@ -2,8 +2,8 @@
 
 # dependencies
 /node_modules
-packages/*/node_modules
-packages/*/build
+**/node_modules
+packages/**/build
 
 # misc
 .DS_Store
