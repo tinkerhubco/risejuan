@@ -1,0 +1,31 @@
+name: risejuan-server CI
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'packages/server/**'
+      - '.github/workflows/server.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Deploy Risejuan Server to Vercel Now
+        run: |
+          npm ci
+          npm run deploy:server
+        env:
+          CI: true
+          ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}

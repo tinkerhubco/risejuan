@@ -1,0 +1,26 @@
+{
+  "name": "risejuan",
+  "private": true,
+  "devDependencies": {
+    "husky": "^4.2.5",
+    "lerna": "3.22.1",
+    "prettier": "^2.0.5",
+    "pretty-quick": "^2.0.1"
+  },
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "start:client": "lerna exec -- npm start --scope @risejuan/client",
+    "build:client": "lerna exec -- npm run build --scope @risejuan/client",
+    "prod:client": "lerna exec -- npm run prod --scope @risejuan/client",
+    "deploy:client": "lerna exec -- npm run deploy --scope @risejuan/client",
+    "start:server": "lerna exec -- npm start --scope @risejuan/server",
+    "build:server": "lerna exec -- npm run build --scope @risejuan/server",
+    "prod:server": "lerna exec -- npm run prod --scope @risejuan/server",
+    "deploy:server": "lerna exec -- npm run deploy --scope @risejuan/server"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  }
+}
