@@ -18,6 +18,3 @@ export class PostCampaignUpdateDto {
     @IsNotEmpty()
     description: string;
 }
-
-
-  
