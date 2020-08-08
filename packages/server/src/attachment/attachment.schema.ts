@@ -4,7 +4,7 @@ import { Document } from "mongoose";
 @Schema()
 export class Attachment extends Document {
     @Prop()
-    url: string
+    url: string;
 
     @Prop({
       default: new Date()
