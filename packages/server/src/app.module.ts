@@ -11,7 +11,6 @@ const databaseUrl = databaseUrlPlaceholder
   .replace('<password>', databasePassword)
   .replace('<dbname>', databaseName);
 
-console.log('database url - ', databaseUrl);
 @Module({
   imports: [MongooseModule.forRoot(databaseUrl), CampaignModule],
   controllers: [],
