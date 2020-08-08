@@ -4,7 +4,7 @@ import { Box, Container } from '@material-ui/core';
 import { styled } from '@material-ui/styles';
 
 const FooterContainer = styled(Container)({
-  paddingBottom: 40,
+  padding: 40,
   display: 'flex',
   justifyContent: 'center',
 });
