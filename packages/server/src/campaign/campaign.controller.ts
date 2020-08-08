@@ -27,6 +27,11 @@ export class CampaignController {
     return this.campaignService.findAll();
   }
 
+  @Get(':id')
+  public getCampaign(@Param('id') id: string) {
+    return this.campaignService.findOne(id);
+  }
+
   @Post('campaign-update/:id')
   @UsePipes(new ValidationPipe({ transform: true }))
   public postCampaignUpdate(@Param('id') id: string, @Body() postCampaignUpdateDto: PostCampaignUpdateDto) {
