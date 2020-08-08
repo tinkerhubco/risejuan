@@ -1,7 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, SchemaTypes } from 'mongoose';
 import { Organizer } from '../organizer/organizer.schema';
-import { Attachment } from '../attachment/attachment.schema';
+import { Attachment } from '../schemas/attachment.schema';
+import { CampaignUpdate } from '../schemas/campaign-update.schema';
 
 @Schema()
 export class Campaign extends Document {
@@ -46,8 +47,8 @@ export class Campaign extends Document {
   attachments: Attachment[];
 
   // TODO - Array of updates
-  @Prop([SchemaTypes.String])
-  updates: string[];
+  @Prop([CampaignUpdate])
+  updates: CampaignUpdate[];
 
   @Prop({
     default: false,
