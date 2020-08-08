@@ -3,14 +3,14 @@
   "name": "risejuan-server",
   "builds": [
     {
-      "src": "build/main.js",
+      "src": "build/serverless.js",
       "use": "@now/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "build/main.js"
+      "dest": "build/serverless.js"
     }
   ]
 }
