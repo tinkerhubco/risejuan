@@ -1,0 +1,11 @@
+{
+  "api": {
+    "port": 8000
+  },
+  "database": {
+    "url": "mongodb+srv://risejuan-dev:<password>@risejuan-dev-cluster.0wagz.mongodb.net/<dbname>?retryWrites=true&w=majority",
+    "name": "ENV:DB_NAME",
+    "username": "ENV:DB_USERNAME",
+    "password": "ENV:DB_PASSWORD"
+  }
+}
