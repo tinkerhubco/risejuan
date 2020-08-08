@@ -1,5 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, SchemaTypes } from 'mongoose';
+import { Type } from 'class-transformer';
+
 import { Organizer } from '../organizer/organizer.schema';
 import { Attachment } from '../schemas/attachment.schema';
 import { CampaignUpdate } from '../schemas/campaign-update.schema';
@@ -15,9 +17,8 @@ export class Campaign extends Document {
   @Prop()
   address: string;
 
-  // TODO - Auth0
   @Prop({ required: true })
-  organizer: Organizer
+  organizer: Organizer;
 
   @Prop([SchemaTypes.String])
   tags: string[];
@@ -42,8 +43,8 @@ export class Campaign extends Document {
   @Prop()
   status: string;
 
-  // TODO - Array of media urls
   @Prop([Attachment])
+  @Type(() => Attachment)
   attachments: Attachment[];
 
   // TODO - Array of updates
