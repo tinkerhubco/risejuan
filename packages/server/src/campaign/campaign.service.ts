@@ -6,8 +6,8 @@ import { Model } from 'mongoose';
 import { Campaign } from './campaign.schema';
 import { CreateCampaignDto } from './create-campaign.dto';
 import { PostCampaignUpdateDto } from './post-campaign-update.dto';
-import { CampaignUpdate } from 'src/schemas/campaign-update.schema';
-import { Attachment } from 'src/schemas/attachment.schema';
+import { CampaignUpdate } from '../schemas/campaign-update.schema';
+import { Attachment } from '../schemas/attachment.schema';
 
 @Injectable()
 export class CampaignService {
