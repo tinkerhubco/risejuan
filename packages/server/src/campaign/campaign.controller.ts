@@ -6,6 +6,9 @@ import {
   UsePipes,
   ValidationPipe,
   Param,
+  Put,
+  Delete,
+  HttpCode,
 } from '@nestjs/common';
 
 import { CampaignService } from './campaign.service';
@@ -49,5 +52,24 @@ export class CampaignController {
     @Body() postDonorDto: PostDonorDto,
   ) {
     return this.campaignService.postDonor(id, postDonorDto);
+  }
+
+  @Put(':id/cancel')
+  @UsePipes(new ValidationPipe({ transform: true }))
+  public async cancelCampaign(@Param('id') id: string) {
+    return this.campaignService.cancelCampaign(id);
+  }
+
+  @Put(':id/complete')
+  @UsePipes(new ValidationPipe({ transform: true }))
+  public async completeCampaign(@Param('id') id: string) {
+    return this.campaignService.completeCampaign(id);
+  }
+
+  @HttpCode(201)
+  @Delete(':id')
+  @UsePipes(new ValidationPipe({ transform: true }))
+  public async deleteCampaign(@Param('id') id: string) {
+    await this.campaignService.deleteCampaign(id);
   }
 }
