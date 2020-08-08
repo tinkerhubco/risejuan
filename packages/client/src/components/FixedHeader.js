@@ -1,27 +1,94 @@
 import React from 'react';
 
+import { useAuth0 } from '@auth0/auth0-react';
 import {
   AppBar,
   Box,
   Button,
   ButtonBase,
+  IconButton,
+  Menu,
+  MenuItem,
   Toolbar,
   Typography,
 } from '@material-ui/core';
+import { AccountCircle } from '@material-ui/icons';
 import { styled } from '@material-ui/styles';
+import { Link as RouterLink } from 'react-router-dom';
 
 import headerLogo from '../assets/header-logo.svg';
 
 export function FixedHeader() {
+  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <S.AppBarWrapper>
       <AppBar color="inherit" position="fixed" elevation={2}>
         <S.Toolbar>
-          <Button color="primary">Discover Campaigns</Button>
-          <S.LogoImageWrapper height="280px">
+          <Button color="primary" component={RouterLink} to="/discover">
+            Discover Campaigns
+          </Button>
+          <S.LogoImageWrapper component={RouterLink} to="/">
             <S.LogoImage component="img" src={headerLogo} />
           </S.LogoImageWrapper>
-          <Button color="primary">Sign in</Button>
+          <Box display="flex">
+            {!isAuthenticated && (
+              <S.SignInButton color="primary" onClick={loginWithRedirect}>
+                Sign in
+              </S.SignInButton>
+            )}
+            <Button
+              color="primary"
+              size="large"
+              variant="contained"
+              onClick={loginWithRedirect}
+            >
+              Start a Campaign
+            </Button>
+            {isAuthenticated && (
+              <Box ml={2}>
+                <IconButton
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={open}
+                  onClose={handleClose}
+                >
+                  {/* TODO:  */}
+                  {/* <MenuItem onClick={handleClose}>My campaigns</MenuItem> */}
+                  <MenuItem onClick={logout}>Logout</MenuItem>
+                </Menu>
+              </Box>
+            )}
+          </Box>
         </S.Toolbar>
       </AppBar>
     </S.AppBarWrapper>
@@ -39,6 +106,12 @@ const S = {
     height: '100%',
     width: '100%',
   }),
+  RightAppBarBlock: styled(Box)({
+    display: 'flex',
+  }),
+  SignInButton: styled(Button)(({ theme }) => ({
+    marginRight: theme.spacing(2),
+  })),
   Title: styled(Typography)({
     flexGrow: 1,
   }),
