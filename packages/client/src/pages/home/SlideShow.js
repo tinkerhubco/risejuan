@@ -30,7 +30,7 @@ const SlideShowText = styled(Box)({
   color: '#FFFFFF',
 });
 
-const SlideShowButton = styled(Button)({
+export const SlideShowButton = styled(Button)({
   marginTop: 10,
   padding: 12,
   paddingLeft: 20,
