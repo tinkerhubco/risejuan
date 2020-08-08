@@ -1,5 +1,11 @@
 import React from 'react';
 
+import { FixedHeader } from '../components';
+
 export const Home = () => {
-  return <div>home page</div>;
+  return (
+    <div>
+      <FixedHeader />
+    </div>
+  );
 };
