@@ -9,7 +9,7 @@ export class Attachment extends Document {
     @Prop({
       default: new Date()
     })
-    createdDate: Date
+    createdDate: Date;
 }
 
 export const AttachmentSchema = SchemaFactory.createForClass(Attachment);
