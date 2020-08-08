@@ -10,6 +10,7 @@
   },
   "scripts": {
     "postinstall": "npm run bootstrap",
+    "lerna": "lerna",
     "bootstrap": "lerna bootstrap",
     "start:client": "lerna exec npm start --scope=@risejuan/client",
     "build:client": "lerna exec npm run build --scope=@risejuan/client",
