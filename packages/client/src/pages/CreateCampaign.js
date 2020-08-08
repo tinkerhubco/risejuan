@@ -140,7 +140,7 @@ function getStepContent({
             label="Campaign description"
             margin="normal"
             placeholder="Tell your story"
-            rows={6}
+            rows={8}
             variant="filled"
             onChange={handleChange}
           />
@@ -160,7 +160,7 @@ export function CreateCampaign() {
   const steps = getSteps();
 
   const [createCampaignSuccess, setCreateCampaignSuccess] = React.useState(
-    true,
+    false,
   );
 
   const handleNext = () => {
