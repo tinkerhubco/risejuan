@@ -6,8 +6,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { Discover } from './pages/Discover';
 import { Home } from './pages/Home';
-import { Login } from './pages/Login';
-import { Logout } from './pages/Logout';
+import { CreateCampaign } from './pages/CreateCampaign';
+import { Dashboard } from './pages/Dashboard';
 
 import { theme } from './theme';
 
@@ -23,10 +23,8 @@ function App() {
           <Switch>
             <Route exact component={Home} path="/" />
             <Route component={Discover} path="/discover" />
-            {/* temporary route */}
-            <Route component={Login} path="/login" />
-            {/* temporary route */}
-            <Route component={Logout} path="/logout" />
+            <Route component={CreateCampaign} path="/create" />
+            <Route component={Dashboard} path="/dashboard" />
           </Switch>
         </Router>
       </ThemeProvider>

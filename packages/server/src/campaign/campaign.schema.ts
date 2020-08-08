@@ -5,6 +5,7 @@ import { Type } from 'class-transformer';
 import { Organizer } from '../organizer/organizer.schema';
 import { Attachment } from '../schemas/attachment.schema';
 import { CampaignUpdate } from '../schemas/campaign-update.schema';
+import { Donor } from '../schemas/donor.schema';
 
 @Schema()
 export class Campaign extends Document {
@@ -24,8 +25,8 @@ export class Campaign extends Document {
   tags: string[];
 
   // TODO - array of transactions from paypal
-  @Prop([SchemaTypes.String])
-  donors: string[];
+  @Prop([Donor])
+  donors: Donor[];
 
   @Prop()
   targetFund: number;

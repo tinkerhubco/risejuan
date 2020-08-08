@@ -3,6 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 import ConfigUtil from './utils/config.util';
 import { CampaignModule } from './campaign/campaign.module';
+import { OrganizerModule } from './organizer/organizer.module';
 
 const databaseUrlPlaceholder = String(ConfigUtil.get('database.url'));
 const databasePassword = ConfigUtil.get('database.password');
@@ -11,9 +12,12 @@ const databaseUrl = databaseUrlPlaceholder
   .replace('<password>', databasePassword)
   .replace('<dbname>', databaseName);
 
-console.log('database url - ', databaseUrl);
 @Module({
-  imports: [MongooseModule.forRoot(databaseUrl), CampaignModule],
+  imports: [
+    MongooseModule.forRoot(databaseUrl),
+    CampaignModule,
+    OrganizerModule,
+  ],
   controllers: [],
   providers: [],
 })

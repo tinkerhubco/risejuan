@@ -11,6 +11,7 @@ import {
 import { CampaignService } from './campaign.service';
 import { CreateCampaignDto } from './create-campaign.dto';
 import { PostCampaignUpdateDto } from './post-campaign-update.dto';
+import { PostDonorDto } from './post-donor.dto';
 
 @Controller('campaigns')
 export class CampaignController {
@@ -34,7 +35,19 @@ export class CampaignController {
 
   @Post(':id/updates')
   @UsePipes(new ValidationPipe({ transform: true }))
-  public postCampaignUpdate(@Param('id') id: string, @Body() postCampaignUpdateDto: PostCampaignUpdateDto) {
+  public postCampaignUpdate(
+    @Param('id') id: string,
+    @Body() postCampaignUpdateDto: PostCampaignUpdateDto,
+  ) {
     return this.campaignService.postCampaignUpdate(id, postCampaignUpdateDto);
+  }
+
+  @Post(':id/donors')
+  @UsePipes(new ValidationPipe({ transform: true }))
+  public postDonor(
+    @Param('id') id: string,
+    @Body() postDonorDto: PostDonorDto,
+  ) {
+    return this.campaignService.postDonor(id, postDonorDto);
   }
 }

@@ -11,7 +11,7 @@ const FooterContainer = styled(Container)({
 export function Footer() {
   return (
     <FooterContainer>
-      <Box>Copyright &copy; 2020 Tinkerhub</Box>
+      <Box>Copyright &copy; 2020 Rise Juan</Box>
     </FooterContainer>
   );
 }
