@@ -2,9 +2,14 @@ import React from 'react';
 import { Container, Box, Grid, Button } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 
+import useSWR from 'swr';
+
 import { SlideShow, SlideShowButton } from './home/SlideShow';
 
 import { Campaign, FixedHeader, Footer } from '../components';
+import { GET_ALL_CAMPAIGNS_URL } from '../constants/api';
+
+import { fetcher } from '../utils/fetcher';
 
 const SectionBox = styled(Box)({
   backgroundColor: 'transparent',
@@ -54,6 +59,10 @@ const FeatureGridButton = styled(SlideShowButton)({
 });
 
 export const Home = () => {
+  const { data: campaigns } = useSWR(GET_ALL_CAMPAIGNS_URL, fetcher);
+
+  console.log('campaigns', campaigns);
+
   return (
     <Box>
       <FixedHeader />
