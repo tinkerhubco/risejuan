@@ -10,6 +10,7 @@ import { CampaignUpdate } from '../schemas/campaign-update.schema';
 import { Attachment } from '../schemas/attachment.schema';
 import { Donor } from '../schemas/donor.schema';
 import { PostDonorDto } from './post-donor.dto';
+import { CampaignStatus } from '../constants/campaign-status';
 
 @Injectable()
 export class CampaignService {
@@ -71,5 +72,21 @@ export class CampaignService {
     campaign.currentFund += donor.amount;
     campaign.donors.push(donor);
     return campaign.save();
+  }
+
+  public async cancelCampaign(campaignId: string) {
+    return this.campaignModel.findByIdAndUpdate(campaignId, {
+      status: CampaignStatus.Cancelled,
+    });
+  }
+  public async completeCampaign(campaignId: string) {
+    return this.campaignModel.findByIdAndUpdate(campaignId, {
+      status: CampaignStatus.Completed,
+    });
+  }
+
+  public async deleteCampaign(campaignId: string) {
+    // If we need soft-delete, use the isDeleted instead
+    return this.campaignModel.findByIdAndDelete(campaignId);
   }
 }

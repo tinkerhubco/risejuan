@@ -6,6 +6,7 @@ import { Organizer } from '../organizer/organizer.schema';
 import { Attachment } from '../schemas/attachment.schema';
 import { CampaignUpdate } from '../schemas/campaign-update.schema';
 import { Donor } from '../schemas/donor.schema';
+import { CampaignStatus } from '../constants/campaign-status';
 
 @Schema()
 export class Campaign extends Document {
@@ -24,7 +25,6 @@ export class Campaign extends Document {
   @Prop([SchemaTypes.String])
   tags: string[];
 
-  // TODO - array of transactions from paypal
   @Prop([Donor])
   donors: Donor[];
 
@@ -42,15 +42,15 @@ export class Campaign extends Document {
   @Prop()
   numberOfEstimatedDonors: number;
 
-  // TOOD - enum
-  @Prop()
-  status: string;
+  @Prop({
+    default: CampaignStatus.Pending,
+  })
+  status: CampaignStatus;
 
   @Prop([Attachment])
   @Type(() => Attachment)
   attachments: Attachment[];
 
-  // TODO - Array of updates
   @Prop([CampaignUpdate])
   updates: CampaignUpdate[];
 
