@@ -2,13 +2,7 @@ import React from 'react';
 import { Container, Box, Grid, Button } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 
-import { SlideShow, SlideShowButton } from './home/SlideShow';
-
 import { Campaign, FixedHeader, Footer } from '../components';
-
-const SectionBox = styled(Box)({
-  backgroundColor: 'transparent',
-});
 
 const SectionBoxColored = styled(Box)({
   backgroundColor: '#F8F5F6',
