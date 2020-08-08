@@ -52,9 +52,11 @@ export function FixedHeader() {
               color="primary"
               size="large"
               variant="contained"
-              onClick={loginWithRedirect}
+              component={isAuthenticated ? RouterLink : undefined}
+              to={isAuthenticated ? '/create' : undefined}
+              onClick={isAuthenticated ? undefined : loginWithRedirect}
             >
-              Start a Campaign
+              Start a campaign
             </Button>
             {isAuthenticated && (
               <Box ml={2}>
