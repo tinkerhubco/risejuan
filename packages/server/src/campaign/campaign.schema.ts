@@ -47,10 +47,14 @@ export class Campaign extends Document {
   @Prop([SchemaTypes.String])
   updates: string[];
 
-  @Prop()
+  @Prop({
+    default: false,
+  })
   isDeleted: boolean;
 
-  @Prop()
+  @Prop({
+    default: new Date(),
+  })
   createdDate: Date;
 
   @Prop()
