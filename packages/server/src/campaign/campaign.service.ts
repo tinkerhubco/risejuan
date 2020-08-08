@@ -26,6 +26,10 @@ export class CampaignService {
     return this.campaignModel.find().exec();
   }
 
+  public async findOne(campaignId: string) {
+    return this.campaignModel.findById(campaignId).exec();
+  }
+
   public async postCampaignUpdate(campaignId: string, postCampaignUpdateDto: PostCampaignUpdateDto) {
     const attachment = new this.attachmentModel(postCampaignUpdateDto.attachment);
     const createdCampaignUpdate = new this.campaignUpdateModel(
@@ -34,7 +38,7 @@ export class CampaignService {
         attachment
       }
     );
-    const campaign = await this.campaignModel.findOne({ _id: campaignId });
+    const campaign = await this.campaignModel.findById(campaignId);
     campaign.updates.push(createdCampaignUpdate);
     return campaign.save();
   }
