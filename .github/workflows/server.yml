@@ -25,7 +25,6 @@ jobs:
       - name: Deploy Risejuan Server to Vercel Now
         run: |
           npm ci
-          vercel switch tinkerhub --token ${{ secrets.ZEIT_TOKEN }}
           npm run deploy:ci:server
         env:
           CI: true
