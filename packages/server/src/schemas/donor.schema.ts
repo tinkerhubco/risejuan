@@ -9,7 +9,9 @@ export class Donor extends Document {
   @Prop()
   name: string;
 
-  @Prop()
+  @Prop({
+    default: false,
+  })
   isAnonymous: boolean;
 
   @Prop({
