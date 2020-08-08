@@ -17,7 +17,7 @@ export class Campaign extends Document {
 
   // TODO - Auth0
   @Prop({ required: true })
-  organizer: Organizer
+  organizer: Organizer;
 
   @Prop([SchemaTypes.String])
   tags: string[];
