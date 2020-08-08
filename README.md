@@ -5,7 +5,7 @@
 ## 🤔 How it works:
 
 1. **Businesses** creates a **campaign** to donate their products to their **community** of choice.
-2. **Donors** contribute by **donating** to **campaigns**.
+2. **Donors** can contribute through **monetary donations** to **campaigns**.
 3. **Campaign donations** not only helps **communities** in need, but also helps **local businesses** sell and promote their products.
 
 ## 👨‍💻 How to use it:
