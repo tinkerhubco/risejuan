@@ -28,4 +28,6 @@ jobs:
           npm run deploy:ci:server
         env:
           CI: true
+          NOW_PROJECT_ID: ${{ secrets.SERVER_NOW_PROJECT_ID }}
+          NOW_ORG_ID: ${{ secrets.SERVER_NOW_ORG_ID }}
           ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
