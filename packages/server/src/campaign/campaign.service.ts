@@ -33,13 +33,11 @@ export class CampaignService {
   }
 
   public async findAllWithOrganizer(organizerId: string) {
-    return await this.campaignModel
-      .find({ 'organizer.id': organizerId })
-      .exec();
+    return this.campaignModel.find({ 'organizer.id': organizerId }).exec();
   }
 
   public async findOneWithOrganizer(organizerId: string, campaignId: string) {
-    return await this.campaignModel
+    return this.campaignModel
       .find({ 'organizer.id': organizerId, _id: campaignId })
       .exec();
   }

@@ -6,13 +6,10 @@ export class OrganizerService {
   constructor(private readonly campaignService: CampaignService) {}
 
   public async findAll(organizerId: string) {
-    return await this.campaignService.findAllWithOrganizer(organizerId);
+    return this.campaignService.findAllWithOrganizer(organizerId);
   }
 
   public async findOne(organizerId: string, campaignId: string) {
-    return await this.campaignService.findOneWithOrganizer(
-      organizerId,
-      campaignId,
-    );
+    return this.campaignService.findOneWithOrganizer(organizerId, campaignId);
   }
 }
