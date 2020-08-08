@@ -21,7 +21,7 @@
     "build:server": "lerna exec npm run build --scope=@risejuan/server",
     "start:server:prod": "lerna exec npm run prod --scope=@risejuan/server",
     "deploy:server": "lerna exec npm run deploy --scope=@risejuan/server",
-    "deploy:ci:server": "lerna exec npm run deploy:co --scope=@risejuan/server"
+    "deploy:ci:server": "lerna exec npm run deploy:ci --scope=@risejuan/server"
   },
   "husky": {
     "hooks": {
