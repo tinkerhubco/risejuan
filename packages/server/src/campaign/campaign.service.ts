@@ -8,6 +8,8 @@ import { CreateCampaignDto } from './create-campaign.dto';
 import { PostCampaignUpdateDto } from './post-campaign-update.dto';
 import { CampaignUpdate } from '../schemas/campaign-update.schema';
 import { Attachment } from '../schemas/attachment.schema';
+import { Donor } from '../schemas/donor.schema';
+import { PostDonorDto } from './post-donor.dto';
 
 @Injectable()
 export class CampaignService {
@@ -17,6 +19,8 @@ export class CampaignService {
     private readonly campaignUpdateModel: Model<CampaignUpdate>,
     @InjectModel(Attachment.name)
     private readonly attachmentModel: Model<Attachment>,
+    @InjectModel(Donor.name)
+    private readonly donorModel: Model<Donor>,
   ) {}
 
   public async create(createCampaignDto: CreateCampaignDto) {
@@ -55,6 +59,13 @@ export class CampaignService {
     });
     const campaign = await this.campaignModel.findById(campaignId);
     campaign.updates.push(createdCampaignUpdate);
+    return campaign.save();
+  }
+
+  public async postDonor(campaignId: string, postDonorDto: PostDonorDto) {
+    const donor = new this.donorModel(postDonorDto);
+    const campaign = await this.campaignModel.findById(campaignId);
+    campaign.donors.push(donor);
     return campaign.save();
   }
 }
