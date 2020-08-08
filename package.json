@@ -9,7 +9,7 @@
     "vercel": "^19.2.0"
   },
   "scripts": {
-    "bootstrap": "lerna bootstrap",
+    "postinstall": "lerna bootstrap",
     "start:client": "lerna exec npm start --scope=@risejuan/client",
     "build:client": "lerna exec npm run build --scope=@risejuan/client",
     "start:client:prod": "lerna exec npm run prod --scope=@risejuan/client",
