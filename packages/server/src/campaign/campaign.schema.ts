@@ -34,7 +34,9 @@ export class Campaign extends Document {
   @Prop()
   targetDate: Date;
 
-  @Prop()
+  @Prop({
+    default: 0,
+  })
   currentFund: number;
 
   @Prop()
