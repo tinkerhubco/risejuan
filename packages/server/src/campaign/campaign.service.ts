@@ -13,8 +13,10 @@ import { Attachment } from '../schemas/attachment.schema';
 export class CampaignService {
   constructor(
     @InjectModel(Campaign.name) private readonly campaignModel: Model<Campaign>,
-    @InjectModel(CampaignUpdate.name) private readonly campaignUpdateModel: Model<CampaignUpdate>,
-    @InjectModel(Attachment.name) private readonly attachmentModel: Model<Attachment>,
+    @InjectModel(CampaignUpdate.name)
+    private readonly campaignUpdateModel: Model<CampaignUpdate>,
+    @InjectModel(Attachment.name)
+    private readonly attachmentModel: Model<Attachment>,
   ) {}
 
   public async create(createCampaignDto: CreateCampaignDto) {
@@ -31,21 +33,28 @@ export class CampaignService {
   }
 
   public async findAllWithOrganizer(organizerId: string) {
-    return await this.campaignModel.find({ 'organizer.id': organizerId }).exec();
+    return await this.campaignModel
+      .find({ 'organizer.id': organizerId })
+      .exec();
   }
 
   public async findOneWithOrganizer(organizerId: string, campaignId: string) {
-    return await this.campaignModel.find({ 'organizer.id': organizerId, _id: campaignId }).exec();
+    return await this.campaignModel
+      .find({ 'organizer.id': organizerId, _id: campaignId })
+      .exec();
   }
 
-  public async postCampaignUpdate(campaignId: string, postCampaignUpdateDto: PostCampaignUpdateDto) {
-    const attachment = new this.attachmentModel(postCampaignUpdateDto.attachment);
-    const createdCampaignUpdate = new this.campaignUpdateModel(
-      {
-        ...postCampaignUpdateDto,
-        attachment
-      }
+  public async postCampaignUpdate(
+    campaignId: string,
+    postCampaignUpdateDto: PostCampaignUpdateDto,
+  ) {
+    const attachment = new this.attachmentModel(
+      postCampaignUpdateDto.attachment,
     );
+    const createdCampaignUpdate = new this.campaignUpdateModel({
+      ...postCampaignUpdateDto,
+      attachment,
+    });
     const campaign = await this.campaignModel.findById(campaignId);
     campaign.updates.push(createdCampaignUpdate);
     return campaign.save();

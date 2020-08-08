@@ -4,7 +4,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Campaign, CampaignSchema } from './campaign.schema';
 import { CampaignController } from './campaign.controller';
 import { CampaignService } from './campaign.service';
-import { CampaignUpdate, CampaignUpdateSchema } from '../schemas/campaign-update.schema';
+import {
+  CampaignUpdate,
+  CampaignUpdateSchema,
+} from '../schemas/campaign-update.schema';
 import { Attachment, AttachmentSchema } from '../schemas/attachment.schema';
 
 @Module({
@@ -17,6 +20,6 @@ import { Attachment, AttachmentSchema } from '../schemas/attachment.schema';
   ],
   controllers: [CampaignController],
   providers: [CampaignService],
-  exports: [CampaignService]
+  exports: [CampaignService],
 })
-export class CampaignModule { }
+export class CampaignModule {}

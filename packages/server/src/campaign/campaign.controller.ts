@@ -34,7 +34,10 @@ export class CampaignController {
 
   @Post(':id/updates')
   @UsePipes(new ValidationPipe({ transform: true }))
-  public postCampaignUpdate(@Param('id') id: string, @Body() postCampaignUpdateDto: PostCampaignUpdateDto) {
+  public postCampaignUpdate(
+    @Param('id') id: string,
+    @Body() postCampaignUpdateDto: PostCampaignUpdateDto,
+  ) {
     return this.campaignService.postCampaignUpdate(id, postCampaignUpdateDto);
   }
 }

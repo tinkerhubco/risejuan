@@ -14,7 +14,11 @@ const databaseUrl = databaseUrlPlaceholder
 
 console.log('database url - ', databaseUrl);
 @Module({
-  imports: [MongooseModule.forRoot(databaseUrl), CampaignModule, OrganizerModule],
+  imports: [
+    MongooseModule.forRoot(databaseUrl),
+    CampaignModule,
+    OrganizerModule,
+  ],
   controllers: [],
   providers: [],
 })
