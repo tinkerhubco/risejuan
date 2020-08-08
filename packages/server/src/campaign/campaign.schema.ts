@@ -1,8 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, SchemaTypes } from 'mongoose';
+import { Organizer } from 'src/organizer/organizer.schema';
 
 @Schema()
 export class Campaign extends Document {
+  
   @Prop()
   name: string;
 
@@ -14,7 +16,7 @@ export class Campaign extends Document {
 
   // TODO - Auth0
   @Prop()
-  organizer: string;
+  organizer: Organizer
 
   @Prop([SchemaTypes.String])
   tags: string[];

@@ -1,4 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
+import { Organizer } from 'src/organizer/organizer.schema';
 
 export class CreateCampaignDto {
   @IsNotEmpty()
@@ -12,7 +13,7 @@ export class CreateCampaignDto {
 
   // TODO
   @IsNotEmpty()
-  organizer: string;
+  organizer: Organizer;
 
   tags: string[];
 
