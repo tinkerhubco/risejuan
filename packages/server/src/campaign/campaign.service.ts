@@ -11,8 +11,8 @@ import { CampaignUpdate } from 'src/schemas/campaign-update.schema';
 @Injectable()
 export class CampaignService {
   constructor(
-    @InjectModel(Campaign.name) private campaignModel: Model<Campaign>,
-    @InjectModel(CampaignUpdate.name) private campaignUpdateModel: Model<CampaignUpdate>,
+    @InjectModel(Campaign.name) private readonly campaignModel: Model<Campaign>,
+    @InjectModel(CampaignUpdate.name) private readonly campaignUpdateModel: Model<CampaignUpdate>,
   ) {}
 
   public async create(createCampaignDto: CreateCampaignDto) {
