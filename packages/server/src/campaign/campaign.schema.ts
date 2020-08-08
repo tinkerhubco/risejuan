@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, SchemaTypes } from 'mongoose';
 import { Organizer } from '../organizer/organizer.schema';
+import { Attachment } from '../attachment/attachment.schema';
 
 @Schema()
 export class Campaign extends Document {
-  
   @Prop()
   name: string;
 
@@ -42,8 +42,8 @@ export class Campaign extends Document {
   status: string;
 
   // TODO - Array of media urls
-  @Prop([SchemaTypes.String])
-  attachments: string[];
+  @Prop([Attachment])
+  attachments: Attachment[];
 
   // TODO - Array of updates
   @Prop([SchemaTypes.String])
