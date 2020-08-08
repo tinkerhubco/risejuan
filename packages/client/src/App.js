@@ -6,9 +6,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { Discover } from './pages/Discover';
 import { Home } from './pages/Home';
+import { CreateCampaign } from './pages/CreateCampaign';
+import { Dashboard } from './pages/Dashboard';
 
 import { theme } from './theme';
-import { CreateCampaign } from './pages/CreateCampaign';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route exact component={Home} path="/" />
             <Route component={Discover} path="/discover" />
             <Route component={CreateCampaign} path="/create" />
+            <Route component={Dashboard} path="/dashboard" />
           </Switch>
         </Router>
       </ThemeProvider>
