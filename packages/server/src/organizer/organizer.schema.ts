@@ -6,7 +6,7 @@ export class Organizer extends Document {
   @Prop()
   name: string;
 
-  @Prop()
+  @Prop({ required: true })
   email: string;
 
   @Prop()
@@ -18,7 +18,7 @@ export class Organizer extends Document {
   @Prop()
   nickname: string;
 
-  @Prop()
+  @Prop({ required: true })
   picture: string;
 
   @Prop()

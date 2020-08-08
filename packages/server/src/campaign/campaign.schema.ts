@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, SchemaTypes } from 'mongoose';
-import { Organizer } from 'src/organizer/organizer.schema';
+import { Organizer } from '../organizer/organizer.schema';
 
 @Schema()
 export class Campaign extends Document {
@@ -15,7 +15,7 @@ export class Campaign extends Document {
   address: string;
 
   // TODO - Auth0
-  @Prop()
+  @Prop({ required: true })
   organizer: Organizer
 
   @Prop([SchemaTypes.String])

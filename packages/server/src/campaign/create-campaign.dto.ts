@@ -1,5 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
-import { Organizer } from 'src/organizer/organizer.schema';
+import { Organizer } from '../organizer/organizer.schema';
 
 export class CreateCampaignDto {
   @IsNotEmpty()
