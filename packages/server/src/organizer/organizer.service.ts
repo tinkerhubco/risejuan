@@ -1,13 +1,15 @@
 import { Injectable } from "@nestjs/common";
-import { InjectModel } from "@nestjs/mongoose";
-import { Campaign } from "../campaign/campaign.schema";
-import { Model } from "mongoose";
+import { CampaignService } from "../campaign/campaign.service";
 
 @Injectable()
 export class OrganizerService {
-    constructor(@InjectModel(Campaign.name) private readonly campaignModel: Model<Campaign>) {}
+    constructor(private readonly campaignService: CampaignService) { }
 
-    public async findAll(email: string) {
-        return this.campaignModel.find({ email }).exec();
+    public async findAll(organizerId: string) {
+        return await this.campaignService.findAllWithOrganizer(organizerId);
+    }
+
+    public async findOne(organizerId: string, campaignId: string) {
+        return await this.campaignService.findOneWithOrganizer(organizerId, campaignId);
     }
 }

@@ -16,6 +16,10 @@ import { Type } from 'class-transformer';
 class CreateCampaignOrganizerDto {
   @IsNotEmpty()
   @IsString()
+  id: string;
+
+  @IsNotEmpty()
+  @IsString()
   name: string;
 
   @IsEmail()

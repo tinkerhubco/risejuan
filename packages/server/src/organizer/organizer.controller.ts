@@ -1,14 +1,17 @@
-import { Controller, Get, Param } from "@nestjs/common";
-import { OrganizerService } from "./organizer.service";
+import { Controller, Get, Param } from '@nestjs/common';
+import { OrganizerService } from './organizer.service';
 
-@Controller('organizers')
+@Controller('organizer')
 export class OrganizerController {
     constructor(private readonly organizerService: OrganizerService) {}
 
-    @Get()
-    public getCampaigns() {
-        const email = 'johnmichael.doroy@gmail.com';
-        console.log(email);
-        return this.organizerService.findAll(email);
+    @Get(':id/campaigns')
+    public getCampaigns(@Param('id') id: string) {
+        return this.organizerService.findAll(id);
+    }
+
+    @Get(':id/campaigns/:campaignId')
+    public getCampaign(@Param('id') id: string, @Param('campaignId') campaignId: string) {
+        return this.organizerService.findOne(id, campaignId);
     }
 }

@@ -4,6 +4,9 @@ import { Document } from 'mongoose';
 @Schema()
 export class Organizer extends Document {
   @Prop()
+  id: string;
+
+  @Prop()
   name: string;
 
   @Prop()

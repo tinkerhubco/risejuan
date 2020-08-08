@@ -12,10 +12,11 @@ import { Attachment, AttachmentSchema } from '../schemas/attachment.schema';
     MongooseModule.forFeature([
       { name: Campaign.name, schema: CampaignSchema },
       { name: CampaignUpdate.name, schema: CampaignUpdateSchema },
-      { name: Attachment.name, schema: AttachmentSchema }
+      { name: Attachment.name, schema: AttachmentSchema },
     ]),
   ],
   controllers: [CampaignController],
   providers: [CampaignService],
+  exports: [CampaignService]
 })
-export class CampaignModule {}
+export class CampaignModule { }

@@ -30,6 +30,14 @@ export class CampaignService {
     return this.campaignModel.findById(campaignId).exec();
   }
 
+  public async findAllWithOrganizer(organizerId: string) {
+    return await this.campaignModel.find({ 'organizer.id': organizerId }).exec();
+  }
+
+  public async findOneWithOrganizer(organizerId: string, campaignId: string) {
+    return await this.campaignModel.find({ 'organizer.id': organizerId, _id: campaignId }).exec();
+  }
+
   public async postCampaignUpdate(campaignId: string, postCampaignUpdateDto: PostCampaignUpdateDto) {
     const attachment = new this.attachmentModel(postCampaignUpdateDto.attachment);
     const createdCampaignUpdate = new this.campaignUpdateModel(
