@@ -37,7 +37,9 @@ const SlideShowButton = styled(Button)({
   paddingRight: 20,
   fontWeight: 'bold',
   textTransform: 'none',
-  fontSize: 16,
+  fontSize: 15,
+  backgroundColor: '#D81B60',
+  color: '#FFFFFF',
 });
 
 export const SlideShow = () => {
@@ -50,11 +52,11 @@ export const SlideShow = () => {
             <br />
             businesses grow together
           </SlideShowText>
-          <SlideShowText fontWeight="fontWeightLight" fontSize={30}>
+          <SlideShowText fontWeight="fontWeightLight" fontSize={32}>
             Get Started Today.
           </SlideShowText>
           <SlideShowText>
-            <SlideShowButton size="large" variant="contained" color="primary">
+            <SlideShowButton size="large" variant="contained">
               Campaign with RiseJuan
             </SlideShowButton>
           </SlideShowText>

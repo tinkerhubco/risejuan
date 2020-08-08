@@ -10,7 +10,7 @@ const SectionBox = styled(Box)({
 });
 
 const SectionBoxColored = styled(Box)({
-  backgroundColor: '#FAF8F6',
+  backgroundColor: '#F8F5F6',
 });
 
 const SectionContainer = styled(Container)({
@@ -54,6 +54,18 @@ export const Home = () => {
       </SectionBox>
       <SectionBoxColored>
         <SectionContainer>
+          <SectionTitle
+            fontWeight="fontWeightBold"
+            fontSize={28}
+            alignSelf="center"
+            textAlign="center"
+          >
+            Helping communities without losing a dime
+          </SectionTitle>
+        </SectionContainer>
+      </SectionBoxColored>
+      <SectionBox>
+        <SectionContainer>
           <SectionTitle fontWeight="fontWeightBold" fontSize={28}>
             Rise Juan Campaigns near you
           </SectionTitle>
@@ -69,7 +81,7 @@ export const Home = () => {
             See more
           </SeeMoreButton>
         </SectionContainer>
-      </SectionBoxColored>
+      </SectionBox>
     </Box>
   );
 };
