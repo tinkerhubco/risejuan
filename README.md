@@ -1,4 +1,4 @@
-# Welcome to Risejuan 👋
+# Welcome to Rise Juan 👋
 
 **Rise Juan** is a fundraising platform that focuses on helping different communities through donations from local businesses. Donors can donate to local businesses to help raise funds for their campaign in helping communities in need.
 
