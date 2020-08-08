@@ -7,11 +7,13 @@ import { CampaignModule } from './campaign/campaign.module';
 const databaseUrlPlaceholder = String(ConfigUtil.get('database.url'));
 const databasePassword = ConfigUtil.get('database.password');
 const databaseName = ConfigUtil.get('database.name');
-const mongoAtlasUrl = databaseUrlPlaceholder
+const databaseUrl = databaseUrlPlaceholder
   .replace('<password>', databasePassword)
   .replace('<dbname>', databaseName);
+
+console.log('database url - ', databaseUrl);
 @Module({
-  imports: [MongooseModule.forRoot(mongoAtlasUrl), CampaignModule],
+  imports: [MongooseModule.forRoot(databaseUrl), CampaignModule],
   controllers: [],
   providers: [],
 })
