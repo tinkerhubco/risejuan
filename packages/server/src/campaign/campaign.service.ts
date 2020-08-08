@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Model } from 'mongoose';
@@ -57,14 +57,18 @@ export class CampaignService {
       ...postCampaignUpdateDto,
       attachment,
     });
-    const campaign = await this.campaignModel.findById(campaignId);
+    const campaign = await this.campaignModel.findById(campaignId).exec();
     campaign.updates.push(createdCampaignUpdate);
     return campaign.save();
   }
 
   public async postDonor(campaignId: string, postDonorDto: PostDonorDto) {
     const donor = new this.donorModel(postDonorDto);
-    const campaign = await this.campaignModel.findById(campaignId);
+    const campaign = await this.campaignModel.findById(campaignId).exec();
+    if (campaign.currentFund >= campaign.targetFund) {
+      throw new BadRequestException('Donation exceeds target fund');
+    }
+    campaign.currentFund += donor.amount;
     campaign.donors.push(donor);
     return campaign.save();
   }
