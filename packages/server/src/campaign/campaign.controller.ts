@@ -17,8 +17,7 @@ export class CampaignController {
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
   public createCampaign(@Body() createCampaignDto: CreateCampaignDto) {
-    console.log('createCampaignDto', createCampaignDto);
-    // return this.campaignService.create(createCampaignDto);
+    return this.campaignService.create(createCampaignDto);
   }
 
   @Get()
