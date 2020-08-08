@@ -9,6 +9,7 @@ import {
   CampaignUpdateSchema,
 } from '../schemas/campaign-update.schema';
 import { Attachment, AttachmentSchema } from '../schemas/attachment.schema';
+import { Donor, DonorSchema } from '../schemas/donor.schema';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { Attachment, AttachmentSchema } from '../schemas/attachment.schema';
       { name: Campaign.name, schema: CampaignSchema },
       { name: CampaignUpdate.name, schema: CampaignUpdateSchema },
       { name: Attachment.name, schema: AttachmentSchema },
+      { name: Donor.name, schema: DonorSchema },
     ]),
   ],
   controllers: [CampaignController],
