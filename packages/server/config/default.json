@@ -1,6 +1,7 @@
 {
   "api": {
-    "port": 8000
+    "port": 8000,
+    "prefix": "api"
   },
   "database": {
     "url": "mongodb+srv://risejuan-dev:<password>@risejuan-dev-cluster.0wagz.mongodb.net/<dbname>?retryWrites=true&w=majority",
