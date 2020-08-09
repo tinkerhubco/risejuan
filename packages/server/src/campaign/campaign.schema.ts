@@ -48,7 +48,6 @@ export class Campaign extends Document {
   status: CampaignStatus;
 
   @Prop([Attachment])
-  @Type(() => Attachment)
   attachments: Attachment[];
 
   @Prop([CampaignUpdate])
@@ -60,7 +59,8 @@ export class Campaign extends Document {
   isDeleted: boolean;
 
   @Prop({
-    default: new Date(),
+    type: Date,
+    default: Date.now,
   })
   createdDate: Date;
 

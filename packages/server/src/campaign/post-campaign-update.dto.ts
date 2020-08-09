@@ -3,10 +3,15 @@ import {
   IsNotEmptyObject,
   IsUrl,
   ValidateNested,
+  IsString,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
 class PostCampaignUpdateAttachmentDto {
+  @IsNotEmpty()
+  @IsString()
+  type: string;
+
   @IsNotEmpty()
   @IsUrl()
   url: string;
