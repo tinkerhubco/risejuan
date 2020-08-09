@@ -232,35 +232,41 @@ export const CampaignDetails = () => {
                   </S.ShareButton>
                 </Box>
                 <Box mt={3}>
-                  {donors.map((donor, index) => {
-                    const isFirstItem = index === 0;
-                    const isLastItem = index === donors.length - 1;
+                  {donors.length ? (
+                    donors.map((donor, index) => {
+                      const isFirstItem = index === 0;
+                      const isLastItem = index === donors.length - 1;
 
-                    return (
-                      <Box key={donor._id} mt={isFirstItem ? undefined : 2}>
-                        <Box display="flex">
-                          <S.PersonOutlineIcon fontSize="large" />
-                          <Box display="flex" flexDirection="column">
-                            <Typography variant="subtitle1">
-                              John Doroy
-                            </Typography>
-                            <Box display="flex">
-                              <Typography variant="subtitle2">
-                                ₱1000&nbsp;
-                                <S.DonationDateDistance
-                                  component="span"
-                                  variant="subtitle2"
-                                >
-                                  - 2 mos
-                                </S.DonationDateDistance>
+                      return (
+                        <Box key={donor._id} mt={isFirstItem ? undefined : 2}>
+                          <Box display="flex">
+                            <S.PersonOutlineIcon fontSize="large" />
+                            <Box display="flex" flexDirection="column">
+                              <Typography variant="subtitle1">
+                                John Doroy
                               </Typography>
+                              <Box display="flex">
+                                <Typography variant="subtitle2">
+                                  ₱1000&nbsp;
+                                  <S.DonationDateDistance
+                                    component="span"
+                                    variant="subtitle2"
+                                  >
+                                    - 2 mos
+                                  </S.DonationDateDistance>
+                                </Typography>
+                              </Box>
                             </Box>
                           </Box>
+                          {!isLastItem && <S.DonorsDivider />}
                         </Box>
-                        {!isLastItem && <S.DonorsDivider />}
-                      </Box>
-                    );
-                  })}
+                      );
+                    })
+                  ) : (
+                    <Typography>
+                      Become the first supporter, your donation matters.
+                    </Typography>
+                  )}
                 </Box>
               </S.StickySidebar>
             </Grid>
