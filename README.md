@@ -36,7 +36,6 @@
 - Frontend: React (CRA)
 
   - Authentication: Auth0
-  - Image upload: Filestack library
 
 - Backend: Node.js
 
@@ -46,8 +45,8 @@
 
 - Infrastructure:
   - Frontend: Vercel Now
-  - Backend: Vercel Now
-  - Storage bucket: AWS S3
+  - Backend: AWS EC2
+  - Storage bucket: Filestack
 
 ## 🤝 Contributing
 
