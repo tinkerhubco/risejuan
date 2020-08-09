@@ -28,9 +28,6 @@ export class Organizer extends Document {
   locale: string;
 
   @Prop()
-  sub: string;
-
-  @Prop()
   emailVerified: boolean;
 
   @Prop()
