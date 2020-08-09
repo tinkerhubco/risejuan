@@ -1,6 +1,6 @@
-const fetcherFn = (baseURL) => (path) => {
+const fetcherFn = (baseURL) => (path, config = {}) => {
   const url = [baseURL, path].join('');
-  return fetch(url).then((r) => r.json());
+  return fetch(url, config).then((r) => r.json());
 };
 
 export const fetcher = fetcherFn(
