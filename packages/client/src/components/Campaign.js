@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 
 import { styled } from '@material-ui/core/styles';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 const RootCard = styled(Card)({
   width: 280,
@@ -24,11 +25,6 @@ const FundingProgress = styled(LinearProgress)({
   marginBottom: 10,
 });
 
-const getDaysDiff = (date1, date2) => {
-  const diffTime = Math.abs(date2 - date1);
-  return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-};
-
 const getCampaignStatus = (campaign) => {
   if (!campaign) return 0;
   else if (campaign.targetFund < campaign.currentFund) return 100;
@@ -36,19 +32,16 @@ const getCampaignStatus = (campaign) => {
 };
 
 const getLastDonorsDescription = (campaign) => {
-  console.log(campaign.donors);
-  if (!campaign || !campaign.donors || campaign.donors.length == 0)
+  if (!campaign || !campaign.donors || campaign.donors.length === 0) {
     return 'Be the first one to donate';
-  else {
-    var length = campaign.donors.length;
-    var lastDonationDate = campaign.donors[length - 1].createdDate;
-    var dayDiff = getDaysDiff(new Date(), new Date(lastDonationDate));
-    return `Last donation ${dayDiff}d ago`;
   }
+  const latestDonor = [...campaign.donors].pop();
+  const latestDonationDate = new Date(latestDonor.createdDate).getTime();
+  return `Last donation ${formatDistanceToNow(latestDonationDate)}`;
 };
 
 export const Campaign = (props) => {
-  var { campaign } = props;
+  const { campaign } = props;
 
   return (
     <RootCard>
