@@ -137,13 +137,11 @@ export const CampaignDetails = () => {
                           August 5, 2020
                         </Typography>
                         <Typography variant="body2">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Nulla semper a nibh nec sagittis. Vivamus tortor
-                          ligula, fringilla hendrerit sodales consequat,
-                          condimentum sit amet orci. Nam dignissim molestie
-                          augue vel tempor. Sed faucibus odio ut placerat
-                          tempor. Aenean id odio id mauris cursus porta. In quis
-                          consequat augue.
+                          While we are already working on the next batch of care
+                          packages, we also increased our campaign goal in order
+                          to help even more affected families. So all of your
+                          future donations will be used and forwarded right
+                          away! :)
                         </Typography>
                       </S.TimelineContentPaper>
                     </TimelineContent>
@@ -160,13 +158,9 @@ export const CampaignDetails = () => {
                           May 30, 2020
                         </Typography>
                         <Typography variant="body2">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Nulla semper a nibh nec sagittis. Vivamus tortor
-                          ligula, fringilla hendrerit sodales consequat,
-                          condimentum sit amet orci. Nam dignissim molestie
-                          augue vel tempor. Sed faucibus odio ut placerat
-                          tempor. Aenean id odio id mauris cursus porta. In quis
-                          consequat augue.
+                          Thank you again to everyone who is helping us to
+                          support our local communities! So far we were already
+                          able to support over 250 families in need :)
                         </Typography>
                       </S.TimelineContentPaper>
                     </TimelineContent>
@@ -182,13 +176,8 @@ export const CampaignDetails = () => {
                           May 24, 2020
                         </Typography>
                         <Typography variant="body2">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Nulla semper a nibh nec sagittis. Vivamus tortor
-                          ligula, fringilla hendrerit sodales consequat,
-                          condimentum sit amet orci. Nam dignissim molestie
-                          augue vel tempor. Sed faucibus odio ut placerat
-                          tempor. Aenean id odio id mauris cursus porta. In quis
-                          consequat augue.
+                          Thank you very much to all our first donors! We highly
+                          appreciate it.
                         </Typography>
                       </S.TimelineContentPaper>
                     </TimelineContent>

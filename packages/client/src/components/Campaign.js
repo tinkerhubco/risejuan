@@ -13,6 +13,8 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { useHistory } from 'react-router-dom';
 import { formatNumberToAmountString } from '../utils';
 
+import { ATTACHMENT_COVER_PHOTO_TYPE } from '../constants';
+
 const RootCard = styled(Card)({
   width: 280,
   marginTop: 30,
@@ -49,13 +51,14 @@ export const Campaign = ({ campaign }) => {
     push(`/campaigns/${campaign._id}`);
   };
 
+  const campaignMedia = campaign.attachments.find(
+    (attachment) => attachment.type === ATTACHMENT_COVER_PHOTO_TYPE,
+  ).url;
+
   return (
     <RootCard>
       <CardActionArea onClick={handleCardActionAreaClick}>
-        <MediaCard
-          image="https://www.sos-childrensvillages.org/getmedia/c52317be-10b1-4471-a215-21e481f1c956/58-Children-play-in-Gursum-village_1200x630.jpg?width=1200&height=630&ext=.jpg"
-          title="Contemplative Reptile"
-        />
+        <MediaCard image={campaignMedia} title="Contemplative Reptile" />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {campaign ? campaign.name : 'Rise Juan Campaign'}

@@ -8,8 +8,11 @@ import {
   CardMedia,
   Typography,
 } from '@material-ui/core';
+import { styled } from '@material-ui/styles';
+import { useHistory } from 'react-router-dom';
+import { format } from 'date-fns';
 
-import { styled } from '@material-ui/core/styles';
+import { ATTACHMENT_COVER_PHOTO_TYPE } from '../../constants';
 
 const RootCard = styled(Card)({
   maxWidth: 280,
@@ -17,31 +20,58 @@ const RootCard = styled(Card)({
 });
 
 const MediaCard = styled(CardMedia)({
-  height: 100,
+  height: 160,
 });
 
-export const Campaign = () => {
+export const Campaign = ({ campaign }) => {
+  const { push } = useHistory();
+
+  const handleCardActionAreaClick = () => {
+    push(`/campaigns/${campaign._id}`);
+  };
+
+  const campaignMedia = campaign.attachments.find(
+    (attachment) => attachment.type === ATTACHMENT_COVER_PHOTO_TYPE,
+  ).url;
+
+  const campaignCreatedDate = format(
+    new Date(campaign.createdDate),
+    'MMMM d, yyyy',
+  );
+
   return (
     <RootCard>
-      <CardActionArea>
-        <MediaCard
-          image="https://www.sos-childrensvillages.org/getmedia/c52317be-10b1-4471-a215-21e481f1c956/58-Children-play-in-Gursum-village_1200x630.jpg?width=1200&height=630&ext=.jpg"
-          title="Contemplative Reptile"
-        />
+      <CardActionArea onClick={handleCardActionAreaClick}>
+        <MediaCard image={campaignMedia} title="Contemplative Reptile" />
         <CardContent>
           <Typography variant="h5" component="h2">
-            Donation to St. Luke's Hospital
+            {campaign.name}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <S.CreatedDate variant="body2" color="textSecondary">
+            {campaignCreatedDate}
+          </S.CreatedDate>
+          {/* TODO: */}
+          {/* <Typography variant="body2" color="textSecondary" component="p">
             Draft
-          </Typography>
+          </Typography> */}
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" fullWidth color="primary">
+        <Button
+          size="small"
+          fullWidth
+          color="primary"
+          onClick={handleCardActionAreaClick}
+        >
           Edit
         </Button>
       </CardActions>
     </RootCard>
   );
+};
+
+const S = {
+  CreatedDate: styled(Typography)(({ theme }) => ({
+    marginTop: theme.spacing(1),
+  })),
 };
