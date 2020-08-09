@@ -7,7 +7,6 @@ import { Campaign } from './campaign.schema';
 import { CreateCampaignDto } from './create-campaign.dto';
 import { PostCampaignUpdateDto } from './post-campaign-update.dto';
 import { CampaignUpdate } from '../schemas/campaign-update.schema';
-import { Attachment } from '../schemas/attachment.schema';
 import { Donor } from '../schemas/donor.schema';
 import { PostDonorDto } from './post-donor.dto';
 import { CampaignStatus } from '../constants/campaign-status';
@@ -18,8 +17,6 @@ export class CampaignService {
     @InjectModel(Campaign.name) private readonly campaignModel: Model<Campaign>,
     @InjectModel(CampaignUpdate.name)
     private readonly campaignUpdateModel: Model<CampaignUpdate>,
-    @InjectModel(Attachment.name)
-    private readonly attachmentModel: Model<Attachment>,
     @InjectModel(Donor.name)
     private readonly donorModel: Model<Donor>,
   ) {}
@@ -51,13 +48,9 @@ export class CampaignService {
     campaignId: string,
     postCampaignUpdateDto: PostCampaignUpdateDto,
   ) {
-    const attachment = new this.attachmentModel(
-      postCampaignUpdateDto.attachment,
+    const createdCampaignUpdate = new this.campaignUpdateModel(
+      postCampaignUpdateDto,
     );
-    const createdCampaignUpdate = new this.campaignUpdateModel({
-      ...postCampaignUpdateDto,
-      attachment,
-    });
     const campaign = await this.campaignModel.findById(campaignId).exec();
     campaign.updates.push(createdCampaignUpdate);
     return campaign.save();

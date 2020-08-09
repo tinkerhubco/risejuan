@@ -15,7 +15,8 @@ export class Donor extends Document {
   isAnonymous: boolean;
 
   @Prop({
-    default: new Date(),
+    type: Date,
+    default: Date.now,
   })
   createdDate: Date;
 }

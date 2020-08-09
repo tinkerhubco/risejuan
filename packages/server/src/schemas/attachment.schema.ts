@@ -10,7 +10,8 @@ export class Attachment extends Document {
   url: string;
 
   @Prop({
-    default: new Date(),
+    type: Date,
+    default: Date.now,
   })
   createdDate: Date;
 }

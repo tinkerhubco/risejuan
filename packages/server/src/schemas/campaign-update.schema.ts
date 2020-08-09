@@ -4,7 +4,7 @@ import { Attachment } from './attachment.schema';
 
 @Schema()
 export class CampaignUpdate extends Document {
-  @Prop()
+  @Prop([Attachment])
   attachment: Attachment;
 
   @Prop()
