@@ -45,6 +45,10 @@ class CreateCampaignOrganizerDto {
 
 class CreateCampaignAttachmentDto {
   @IsNotEmpty()
+  @IsString()
+  type: string;
+
+  @IsNotEmpty()
   @IsUrl()
   url: string;
 }
@@ -80,8 +84,6 @@ export class CreateCampaignDto {
   @IsDateString()
   targetDate: Date;
 
-  @IsNotEmpty()
-  @IsNumber()
   numberOfEstimatedDonors: number;
 
   @IsArray()

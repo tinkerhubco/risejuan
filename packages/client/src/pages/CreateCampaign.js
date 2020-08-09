@@ -21,9 +21,18 @@ import {
 } from '@material-ui/pickers';
 import ReactFilestack from 'filestack-react';
 import { useFormik } from 'formik';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import { Main } from '../components/Main';
 import { FixedHeader } from '../components';
+
+import { fetcher } from '../utils/fetcher';
+import { tryCatch } from '../utils/tryCatch';
+import { CREATE_CAMPAIGN_URL } from '../constants/api';
+import {
+  ATTACHMENT_DOCUMENT_TYPE,
+  ATTACHMENT_COVER_PHOTO_TYPE,
+} from '../constants/document';
 
 function getSteps() {
   return ['Campaign details', 'Campaign documents', 'Tell your story'];
@@ -97,7 +106,9 @@ function getStepContent({
         </S.UploadSuccessText>
       ) : (
         <ReactFilestack
-          apikey={process.env.REACT_APP_FILESTACK_API_KEY}
+          apikey={
+            'Awxpo1nbYQlawsd6gu1b3z' || process.env.REACT_APP_FILESTACK_API_KEY
+          }
           customRender={({ onPick }) => (
             <Box>
               <S.UploadButton color="primary" size="large" onClick={onPick}>
@@ -121,7 +132,10 @@ function getStepContent({
             </S.UploadSuccessText>
           ) : (
             <ReactFilestack
-              apikey={process.env.REACT_APP_FILESTACK_API_KEY}
+              apikey={
+                'Awxpo1nbYQlawsd6gu1b3z' ||
+                process.env.REACT_APP_FILESTACK_API_KEY
+              }
               customRender={({ onPick }) => (
                 <S.UploadButton color="primary" size="large" onClick={onPick}>
                   Add a cover photo or video
@@ -142,6 +156,7 @@ function getStepContent({
             placeholder="Tell your story"
             rows={8}
             variant="filled"
+            name="campaignDescription"
             onChange={handleChange}
           />
         </Box>
@@ -153,8 +168,11 @@ function getStepContent({
 
 export function CreateCampaign() {
   const [activeStep, setActiveStep] = React.useState(0);
+  const { user } = useAuth0();
   const formik = useFormik({
-    initialValues: {},
+    initialValues: {
+      campaignDate: new Date(),
+    },
   });
 
   const steps = getSteps();
@@ -163,10 +181,58 @@ export function CreateCampaign() {
     false,
   );
 
-  const handleNext = () => {
+  const handleCreateCampaign = () => {
+    const {
+      values: {
+        campaignTitle: name,
+        campaignDescription: description,
+        address,
+        targetAmount: targetFund,
+        campaignDate,
+        campaignProofDocument,
+        coverMedia,
+      },
+    } = formik;
+    const campaignPayload = {
+      name,
+      description,
+      address,
+      organizer: {
+        ...user,
+        id: user.sub,
+      },
+      targetFund,
+      targetDate: campaignDate.toISOString(),
+      attachments: [
+        {
+          type: ATTACHMENT_DOCUMENT_TYPE,
+          url: campaignProofDocument.url,
+        },
+        {
+          type: ATTACHMENT_COVER_PHOTO_TYPE,
+          url: coverMedia.url,
+        },
+      ],
+    };
+
+    return tryCatch(() =>
+      fetcher(CREATE_CAMPAIGN_URL, {
+        method: 'POST',
+        body: JSON.stringify(campaignPayload),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+    );
+  };
+
+  const handleNext = async () => {
     if (activeStep === steps.length - 1) {
-      // TODO: implement submit
-      setCreateCampaignSuccess(true);
+      const [data] = await handleCreateCampaign();
+
+      if (data) {
+        setCreateCampaignSuccess(true);
+      }
     }
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
