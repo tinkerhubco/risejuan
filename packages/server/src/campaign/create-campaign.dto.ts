@@ -38,8 +38,6 @@ class CreateCampaignOrganizerDto {
 
   locale: string;
 
-  sub: string;
-
   emailVerified: boolean;
 }
 
