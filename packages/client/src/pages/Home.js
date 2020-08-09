@@ -195,12 +195,14 @@ export const Home = () => {
             Why Rise Juan is like no other
           </Box>
           <SectionDescription>
-            We believe that <b>any little act of kindness</b> can create an{' '}
-            <b>endless ripple</b>. <b>Rise Juan</b> focuses on helping
-            communities and groups in need
-            <b> without setting local businesses aside</b>. We create an{' '}
-            <b>opportunity</b> for local businesses to <b>grow</b> and{' '}
-            <b>promote</b> their products through the <b>act of giving</b>.
+            We believe that any little act of kindness can <br /> create an
+            endless ripple.
+          </SectionDescription>
+          <SectionDescription>
+            <b>Rise Juan</b> focuses on helping communities and groups in need
+            without setting local businesses aside. We create an opportunity for
+            local businesses to grow and promote their products through the act
+            of giving.
           </SectionDescription>
           <FeatureGridButton size="large" variant="contained">
             Campaign with RiseJuan
