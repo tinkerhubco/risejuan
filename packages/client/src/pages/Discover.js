@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Box, Grid, Button } from '@material-ui/core';
+import { Container, Box, Grid } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 
 import { Campaign, FixedHeader, Footer } from '../components';
@@ -26,14 +26,6 @@ const SectionContainer = styled(Container)({
 
 const SectionTitle = styled(Box)({
   margin: 10,
-});
-
-const SeeMoreButton = styled(Button)({
-  margin: 20,
-  alignSelf: 'flex-end',
-  textTransform: 'none',
-  fontSize: 16,
-  color: '#666666',
 });
 
 export const Discover = () => {
@@ -63,9 +55,6 @@ export const Discover = () => {
             <Campaign />
             <Campaign />
           </Grid>
-          <SeeMoreButton color="primary" size="large">
-            See more
-          </SeeMoreButton>
         </SectionContainer>
       </SectionBoxColored>
       <Footer />

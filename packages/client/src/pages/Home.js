@@ -27,8 +27,10 @@ const SectionContainer = styled(Container)({
   paddingBottom: 30,
 });
 
-const SectionTitle = styled(Box)({
-  marginLeft: 20,
+const SectionDescription = styled(Box)({
+  marginTop: 20,
+  width: '50vw',
+  minWidth: 200,
 });
 
 const SeeMoreButton = styled(Button)({
@@ -69,9 +71,9 @@ export const Home = () => {
       <SlideShow />
       <SectionBox>
         <SectionContainer>
-          <SectionTitle fontWeight="fontWeightBold" fontSize={28}>
+          <Box fontWeight="fontWeightBold" fontSize={28}>
             Latest Campaigns
-          </SectionTitle>
+          </Box>
           <Grid container direction="row" justify="space-evenly">
             <Campaign />
             <Campaign />
@@ -84,23 +86,22 @@ export const Home = () => {
       </SectionBox>
       <SectionBoxColored>
         <SectionContainer>
-          <SectionTitle
+          <Box
             fontWeight="fontWeightBold"
             fontSize={28}
             alignSelf="center"
             textAlign="center"
           >
             Helping communities without losing a dime
-          </SectionTitle>
+          </Box>
           <Grid container direction="row" justify="space-evenly">
             <FeatureGrid xs={3}>
               <Box fontWeight="fontWeightBold" fontSize={18}>
-                Win Win
+                Grow your business
               </Box>
               <FeatureDescription fontWeight="fontWeightLight" fontSize={18}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Maecenas ultricies orci mauris, sed scelerisque lorem
-                consectetur quis.
+                Each product you donate to communities in need will help you
+                create an income.
               </FeatureDescription>
             </FeatureGrid>
             <FeatureGrid xs={3}>
@@ -108,9 +109,34 @@ export const Home = () => {
                 Campaign in minutes
               </Box>
               <FeatureDescription fontWeight="fontWeightLight" fontSize={18}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Maecenas ultricies orci mauris, sed scelerisque lorem
-                consectetur quis.
+                You can setup and share your Rise Juan campaign in minutes.
+              </FeatureDescription>
+            </FeatureGrid>
+            <FeatureGrid xs={3}>
+              <Box fontWeight="fontWeightBold" fontSize={18}>
+                Product Promotion
+              </Box>
+              <FeatureDescription fontWeight="fontWeightLight" fontSize={18}>
+                More and more communities will have the chance to experience
+                your product.
+              </FeatureDescription>
+            </FeatureGrid>
+            <FeatureGrid xs={3}>
+              <Box fontWeight="fontWeightBold" fontSize={18}>
+                Giving Chance
+              </Box>
+              <FeatureDescription fontWeight="fontWeightLight" fontSize={18}>
+                This is your opportunity to donate and help communities and
+                groups in need.
+              </FeatureDescription>
+            </FeatureGrid>
+            <FeatureGrid xs={3}>
+              <Box fontWeight="fontWeightBold" fontSize={18}>
+                Business Publicity
+              </Box>
+              <FeatureDescription fontWeight="fontWeightLight" fontSize={18}>
+                Campaigning for a cause can help you advertise your product and
+                create an image for your business.
               </FeatureDescription>
             </FeatureGrid>
             <FeatureGrid xs={3}>
@@ -118,39 +144,8 @@ export const Home = () => {
                 Win Win
               </Box>
               <FeatureDescription fontWeight="fontWeightLight" fontSize={18}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Maecenas ultricies orci mauris, sed scelerisque lorem
-                consectetur quis.
-              </FeatureDescription>
-            </FeatureGrid>
-            <FeatureGrid xs={3}>
-              <Box fontWeight="fontWeightBold" fontSize={18}>
-                Win Win
-              </Box>
-              <FeatureDescription fontWeight="fontWeightLight" fontSize={18}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Maecenas ultricies orci mauris, sed scelerisque lorem
-                consectetur quis.
-              </FeatureDescription>
-            </FeatureGrid>
-            <FeatureGrid xs={3}>
-              <Box fontWeight="fontWeightBold" fontSize={18}>
-                Campaign in minutes
-              </Box>
-              <FeatureDescription fontWeight="fontWeightLight" fontSize={18}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Maecenas ultricies orci mauris, sed scelerisque lorem
-                consectetur quis.
-              </FeatureDescription>
-            </FeatureGrid>
-            <FeatureGrid xs={3}>
-              <Box fontWeight="fontWeightBold" fontSize={18}>
-                Win Win
-              </Box>
-              <FeatureDescription fontWeight="fontWeightLight" fontSize={18}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Maecenas ultricies orci mauris, sed scelerisque lorem
-                consectetur quis.
+                You have nothing to lose when helping out someone. Start your
+                Rise Juan Campaign today!
               </FeatureDescription>
             </FeatureGrid>
           </Grid>
@@ -161,9 +156,36 @@ export const Home = () => {
       </SectionBoxColored>
       <SectionBox>
         <SectionContainer>
-          <SectionTitle fontWeight="fontWeightBold" fontSize={28}>
+          <Box
+            fontWeight="fontWeightBold"
+            fontSize={28}
+            alignSelf="center"
+            textAlign="center"
+          >
+            Why Rise Juan is like no other
+          </Box>
+          <SectionDescription
+            fontWeight="fontWeightLight"
+            fontSize={24}
+            alignSelf="center"
+            textAlign="center"
+          >
+            We believe that any little act of kindness can create an endless
+            ripple. Rise Juan focuses on helping communities and groups in need
+            without setting local businesses aside. We create an opportunity for
+            local businesses to grow and promote their products through the act
+            of giving.
+          </SectionDescription>
+          <FeatureGridButton size="large" variant="contained">
+            Campaign with RiseJuan
+          </FeatureGridButton>
+        </SectionContainer>
+      </SectionBox>
+      <SectionBoxColored>
+        <SectionContainer>
+          <Box fontWeight="fontWeightBold" fontSize={28}>
             Rise Juan Campaigns near you
-          </SectionTitle>
+          </Box>
           <Grid container direction="row" justify="space-evenly">
             <Campaign />
             <Campaign />
@@ -176,7 +198,7 @@ export const Home = () => {
             See more
           </SeeMoreButton>
         </SectionContainer>
-      </SectionBox>
+      </SectionBoxColored>
       <Footer />
     </Box>
   );
