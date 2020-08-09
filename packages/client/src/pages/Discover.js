@@ -36,6 +36,10 @@ const SectionTitle = styled(Box)({
 export const Discover = () => {
   const { data: campaigns } = useSWR(GET_ALL_CAMPAIGNS_URL, fetcher);
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Box>
       <FixedHeader />
