@@ -1,13 +1,10 @@
 import React from 'react';
 import { Container, Box, Grid } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
-
 import useSWR from 'swr';
 
 import { Campaign, FixedHeader, Footer } from '../components';
-import { GET_ALL_CAMPAIGNS_URL } from '../constants/api';
-
-import { fetcher } from '../utils/fetcher';
+import { GET_ALL_CAMPAIGNS_ENDPOINT } from '../constants/api';
 
 const SectionBoxColored = styled(Box)({
   backgroundColor: '#F8F5F6',
@@ -34,11 +31,21 @@ const SectionTitle = styled(Box)({
 });
 
 export const Discover = () => {
-  const { data: campaigns } = useSWR(GET_ALL_CAMPAIGNS_URL, fetcher);
+  const { data: campaigns, error } = useSWR(GET_ALL_CAMPAIGNS_ENDPOINT);
+
+  const isLoading = !campaigns && !error;
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  if (isLoading) {
+    return <Box>Loading...</Box>;
+  }
+
+  const sortedCampaigns = [...campaigns].sort(
+    (a, b) => new Date(b.createdDate) - new Date(a.createdDate),
+  );
 
   return (
     <Box>
@@ -56,11 +63,9 @@ export const Discover = () => {
       <SectionBoxColored>
         <SectionContainer>
           <Grid container direction="row" justify="space-evenly">
-            {campaigns
-              ? campaigns.reverse().map((campaign, key) => {
-                  return <Campaign key={key} campaign={campaign} />;
-                })
-              : null}
+            {sortedCampaigns.map((campaign, key) => {
+              return <Campaign key={key} campaign={campaign} />;
+            })}
           </Grid>
         </SectionContainer>
       </SectionBoxColored>

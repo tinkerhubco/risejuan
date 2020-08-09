@@ -10,6 +10,8 @@ import {
 
 import { styled } from '@material-ui/core/styles';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import { useHistory } from 'react-router-dom';
+import { formatNumberToAmountString } from '../utils';
 
 const RootCard = styled(Card)({
   width: 280,
@@ -40,12 +42,16 @@ const getLastDonorsDescription = (campaign) => {
   return `Last donation ${formatDistanceToNow(latestDonationDate)}`;
 };
 
-export const Campaign = (props) => {
-  const { campaign } = props;
+export const Campaign = ({ campaign }) => {
+  const { push } = useHistory();
+
+  const handleCardActionAreaClick = () => {
+    push(`/campaigns/${campaign._id}`);
+  };
 
   return (
     <RootCard>
-      <CardActionArea>
+      <CardActionArea onClick={handleCardActionAreaClick}>
         <MediaCard
           image="https://www.sos-childrensvillages.org/getmedia/c52317be-10b1-4471-a215-21e481f1c956/58-Children-play-in-Gursum-village_1200x630.jpg?width=1200&height=630&ext=.jpg"
           title="Contemplative Reptile"
@@ -73,8 +79,12 @@ export const Campaign = (props) => {
           />
           <Typography variant="h6" color="textSecondary">
             {campaign
-              ? `$${campaign.currentFund} raised of $${campaign.targetFund}`
-              : '<b>$0 raised</b> of $0'}
+              ? `₱${formatNumberToAmountString(
+                  campaign.currentFund,
+                )} raised of ₱${formatNumberToAmountString(
+                  campaign.targetFund,
+                )}`
+              : '<b>₱0 raised</b> of ₱0'}
           </Typography>
         </CardContent>
       </CardActionArea>

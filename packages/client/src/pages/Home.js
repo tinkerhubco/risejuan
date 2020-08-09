@@ -8,9 +8,7 @@ import useSWR from 'swr';
 import { SlideShow, SlideShowButton } from './home/SlideShow';
 
 import { Campaign, FixedHeader, Footer } from '../components';
-import { GET_ALL_CAMPAIGNS_URL } from '../constants/api';
-
-import { fetcher } from '../utils/fetcher';
+import { GET_ALL_CAMPAIGNS_ENDPOINT } from '../constants/api';
 
 const SectionBox = styled(Box)({
   backgroundColor: 'transparent',
@@ -86,7 +84,7 @@ const trendingCampaigns = (campaigns) => {
 };
 
 export const Home = () => {
-  const { data: campaigns } = useSWR(GET_ALL_CAMPAIGNS_URL, fetcher);
+  const { data: campaigns } = useSWR(GET_ALL_CAMPAIGNS_ENDPOINT);
 
   return (
     <Box>
