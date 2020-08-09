@@ -60,10 +60,29 @@ const FeatureGridButton = styled(SlideShowButton)({
   marginTop: 30,
 });
 
+const getCampaignStatus = (campaign) => {
+  if (!campaign) return 0;
+  return (campaign.currentFund / campaign.targetFund) * 100;
+};
+
+const latestCampaigns = (campaigns) => {
+  return campaigns
+    .sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate))
+    .slice(0, 3);
+};
+
+const trendingCampaigns = (campaigns) => {
+  return campaigns
+    .map((value) => {
+      value['status'] = getCampaignStatus(value);
+      return value;
+    })
+    .sort((a, b) => b.status - a.status)
+    .slice(0, 6);
+};
+
 export const Home = () => {
   const { data: campaigns } = useSWR(GET_ALL_CAMPAIGNS_URL, fetcher);
-
-  console.log('campaigns', campaigns);
 
   return (
     <Box>
@@ -75,9 +94,11 @@ export const Home = () => {
             Latest Campaigns
           </Box>
           <Grid container direction="row" justify="space-evenly">
-            <Campaign />
-            <Campaign />
-            <Campaign />
+            {campaigns
+              ? latestCampaigns(campaigns).map((campaign, key) => {
+                  return <Campaign key={key} campaign={campaign} />;
+                })
+              : null}
           </Grid>
           <SeeMoreButton color="primary" size="large">
             See more
@@ -184,15 +205,14 @@ export const Home = () => {
       <SectionBoxColored>
         <SectionContainer>
           <Box fontWeight="fontWeightBold" fontSize={28}>
-            Rise Juan Campaigns near you
+            Help out fulfill these Campaigns
           </Box>
           <Grid container direction="row" justify="space-evenly">
-            <Campaign />
-            <Campaign />
-            <Campaign />
-            <Campaign />
-            <Campaign />
-            <Campaign />
+            {campaigns
+              ? trendingCampaigns(campaigns).map((campaign, key) => {
+                  return <Campaign key={key} campaign={campaign} />;
+                })
+              : null}
           </Grid>
           <SeeMoreButton color="primary" size="large">
             See more
