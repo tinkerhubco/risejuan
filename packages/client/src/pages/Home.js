@@ -1,6 +1,7 @@
 import React from 'react';
-import { Container, Box, Grid, Button } from '@material-ui/core';
+import { Container, Box, Grid, Button, Typography } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
+import { Link as RouterLink } from 'react-router-dom';
 
 import useSWR from 'swr';
 
@@ -27,10 +28,14 @@ const SectionContainer = styled(Container)({
   paddingBottom: 30,
 });
 
-const SectionDescription = styled(Box)({
+const SectionDescription = styled(Typography)({
   marginTop: 20,
   width: '50vw',
   minWidth: 200,
+  fontSize: 20,
+  textAlign: 'center',
+  fontWeight: 'lighter',
+  alignSelf: 'center',
 });
 
 const SeeMoreButton = styled(Button)({
@@ -39,6 +44,7 @@ const SeeMoreButton = styled(Button)({
   textTransform: 'none',
   fontSize: 16,
   color: '#666666',
+  textDecoration: 'none',
 });
 
 const FeatureGrid = styled(Grid)({
@@ -66,9 +72,7 @@ const getCampaignStatus = (campaign) => {
 };
 
 const latestCampaigns = (campaigns) => {
-  return campaigns
-    .sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate))
-    .slice(0, 3);
+  return campaigns.reverse().slice(0, 3);
 };
 
 const trendingCampaigns = (campaigns) => {
@@ -100,7 +104,12 @@ export const Home = () => {
                 })
               : null}
           </Grid>
-          <SeeMoreButton color="primary" size="large">
+          <SeeMoreButton
+            component={RouterLink}
+            to="/discover"
+            color="primary"
+            size="large"
+          >
             See more
           </SeeMoreButton>
         </SectionContainer>
@@ -185,17 +194,13 @@ export const Home = () => {
           >
             Why Rise Juan is like no other
           </Box>
-          <SectionDescription
-            fontWeight="fontWeightLight"
-            fontSize={24}
-            alignSelf="center"
-            textAlign="center"
-          >
-            We believe that any little act of kindness can create an endless
-            ripple. Rise Juan focuses on helping communities and groups in need
-            without setting local businesses aside. We create an opportunity for
-            local businesses to grow and promote their products through the act
-            of giving.
+          <SectionDescription>
+            We believe that <b>any little act of kindness</b> can create an{' '}
+            <b>endless ripple</b>. <b>Rise Juan</b> focuses on helping
+            communities and groups in need
+            <b> without setting local businesses aside</b>. We create an{' '}
+            <b>opportunity</b> for local businesses to <b>grow</b> and{' '}
+            <b>promote</b> their products through the <b>act of giving</b>.
           </SectionDescription>
           <FeatureGridButton size="large" variant="contained">
             Campaign with RiseJuan
@@ -214,7 +219,12 @@ export const Home = () => {
                 })
               : null}
           </Grid>
-          <SeeMoreButton color="primary" size="large">
+          <SeeMoreButton
+            component={RouterLink}
+            to="/discover"
+            color="primary"
+            size="large"
+          >
             See more
           </SeeMoreButton>
         </SectionContainer>
