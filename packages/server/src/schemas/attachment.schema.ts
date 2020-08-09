@@ -4,6 +4,9 @@ import { Document } from 'mongoose';
 @Schema()
 export class Attachment extends Document {
   @Prop()
+  type: string;
+
+  @Prop()
   url: string;
 
   @Prop({
