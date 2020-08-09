@@ -9,9 +9,10 @@ import {
 } from '@material-ui/core';
 
 import { styled } from '@material-ui/core/styles';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 const RootCard = styled(Card)({
-  maxWidth: 280,
+  width: 280,
   marginTop: 30,
 });
 
@@ -24,7 +25,24 @@ const FundingProgress = styled(LinearProgress)({
   marginBottom: 10,
 });
 
-export const Campaign = () => {
+const getCampaignStatus = (campaign) => {
+  if (!campaign) return 0;
+  else if (campaign.targetFund < campaign.currentFund) return 100;
+  else return (campaign.currentFund / campaign.targetFund) * 100;
+};
+
+const getLastDonorsDescription = (campaign) => {
+  if (!campaign || !campaign.donors || campaign.donors.length === 0) {
+    return 'Be the first one to donate';
+  }
+  const latestDonor = [...campaign.donors].pop();
+  const latestDonationDate = new Date(latestDonor.createdDate).getTime();
+  return `Last donation ${formatDistanceToNow(latestDonationDate)}`;
+};
+
+export const Campaign = (props) => {
+  const { campaign } = props;
+
   return (
     <RootCard>
       <CardActionArea>
@@ -34,7 +52,7 @@ export const Campaign = () => {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Lizard
+            {campaign ? campaign.name : 'Rise Juan Campaign'}
           </Typography>
           <Typography
             gutterBottom
@@ -42,17 +60,21 @@ export const Campaign = () => {
             color="textSecondary"
             component="p"
           >
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {campaign ? campaign.description : 'No Description added.'}
           </Typography>
         </CardContent>
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            Last donation 3d ago
+            {getLastDonorsDescription(campaign)}
           </Typography>
-          <FundingProgress variant="determinate" value={20} />
+          <FundingProgress
+            variant="determinate"
+            value={getCampaignStatus(campaign)}
+          />
           <Typography variant="h6" color="textSecondary">
-            <b>$230 raised</b> of $3,500
+            {campaign
+              ? `$${campaign.currentFund} raised of $${campaign.targetFund}`
+              : '<b>$0 raised</b> of $0'}
           </Typography>
         </CardContent>
       </CardActionArea>

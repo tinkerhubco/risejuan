@@ -2,7 +2,12 @@ import React from 'react';
 import { Container, Box, Grid } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 
+import useSWR from 'swr';
+
 import { Campaign, FixedHeader, Footer } from '../components';
+import { GET_ALL_CAMPAIGNS_URL } from '../constants/api';
+
+import { fetcher } from '../utils/fetcher';
 
 const SectionBoxColored = styled(Box)({
   backgroundColor: '#F8F5F6',
@@ -29,6 +34,8 @@ const SectionTitle = styled(Box)({
 });
 
 export const Discover = () => {
+  const { data: campaigns } = useSWR(GET_ALL_CAMPAIGNS_URL, fetcher);
+
   return (
     <Box>
       <FixedHeader />
@@ -45,15 +52,11 @@ export const Discover = () => {
       <SectionBoxColored>
         <SectionContainer>
           <Grid container direction="row" justify="space-evenly">
-            <Campaign />
-            <Campaign />
-            <Campaign />
-            <Campaign />
-            <Campaign />
-            <Campaign />
-            <Campaign />
-            <Campaign />
-            <Campaign />
+            {campaigns
+              ? campaigns.reverse().map((campaign, key) => {
+                  return <Campaign key={key} campaign={campaign} />;
+                })
+              : null}
           </Grid>
         </SectionContainer>
       </SectionBoxColored>

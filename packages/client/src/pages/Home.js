@@ -1,6 +1,7 @@
 import React from 'react';
-import { Container, Box, Grid, Button } from '@material-ui/core';
+import { Container, Box, Grid, Button, Typography } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
+import { Link as RouterLink } from 'react-router-dom';
 
 import useSWR from 'swr';
 
@@ -27,10 +28,14 @@ const SectionContainer = styled(Container)({
   paddingBottom: 30,
 });
 
-const SectionDescription = styled(Box)({
+const SectionDescription = styled(Typography)({
   marginTop: 20,
   width: '50vw',
   minWidth: 200,
+  fontSize: 20,
+  textAlign: 'center',
+  fontWeight: 'lighter',
+  alignSelf: 'center',
 });
 
 const SeeMoreButton = styled(Button)({
@@ -39,6 +44,7 @@ const SeeMoreButton = styled(Button)({
   textTransform: 'none',
   fontSize: 16,
   color: '#666666',
+  textDecoration: 'none',
 });
 
 const FeatureGrid = styled(Grid)({
@@ -60,10 +66,27 @@ const FeatureGridButton = styled(SlideShowButton)({
   marginTop: 30,
 });
 
+const getCampaignStatus = (campaign) => {
+  if (!campaign) return 0;
+  return (campaign.currentFund / campaign.targetFund) * 100;
+};
+
+const latestCampaigns = (campaigns) => {
+  return campaigns.reverse().slice(0, 3);
+};
+
+const trendingCampaigns = (campaigns) => {
+  return campaigns
+    .map((value) => {
+      value['status'] = getCampaignStatus(value);
+      return value;
+    })
+    .sort((a, b) => b.status - a.status)
+    .slice(0, 6);
+};
+
 export const Home = () => {
   const { data: campaigns } = useSWR(GET_ALL_CAMPAIGNS_URL, fetcher);
-
-  console.log('campaigns', campaigns);
 
   return (
     <Box>
@@ -75,11 +98,18 @@ export const Home = () => {
             Latest Campaigns
           </Box>
           <Grid container direction="row" justify="space-evenly">
-            <Campaign />
-            <Campaign />
-            <Campaign />
+            {campaigns
+              ? latestCampaigns(campaigns).map((campaign, key) => {
+                  return <Campaign key={key} campaign={campaign} />;
+                })
+              : null}
           </Grid>
-          <SeeMoreButton color="primary" size="large">
+          <SeeMoreButton
+            component={RouterLink}
+            to="/discover"
+            color="primary"
+            size="large"
+          >
             See more
           </SeeMoreButton>
         </SectionContainer>
@@ -164,14 +194,12 @@ export const Home = () => {
           >
             Why Rise Juan is like no other
           </Box>
-          <SectionDescription
-            fontWeight="fontWeightLight"
-            fontSize={24}
-            alignSelf="center"
-            textAlign="center"
-          >
-            We believe that any little act of kindness can create an endless
-            ripple. Rise Juan focuses on helping communities and groups in need
+          <SectionDescription>
+            We believe that any little act of kindness can <br /> create an
+            endless ripple.
+          </SectionDescription>
+          <SectionDescription>
+            <b>Rise Juan</b> focuses on helping communities and groups in need
             without setting local businesses aside. We create an opportunity for
             local businesses to grow and promote their products through the act
             of giving.
@@ -184,17 +212,21 @@ export const Home = () => {
       <SectionBoxColored>
         <SectionContainer>
           <Box fontWeight="fontWeightBold" fontSize={28}>
-            Rise Juan Campaigns near you
+            Help out fulfill these Campaigns
           </Box>
           <Grid container direction="row" justify="space-evenly">
-            <Campaign />
-            <Campaign />
-            <Campaign />
-            <Campaign />
-            <Campaign />
-            <Campaign />
+            {campaigns
+              ? trendingCampaigns(campaigns).map((campaign, key) => {
+                  return <Campaign key={key} campaign={campaign} />;
+                })
+              : null}
           </Grid>
-          <SeeMoreButton color="primary" size="large">
+          <SeeMoreButton
+            component={RouterLink}
+            to="/discover"
+            color="primary"
+            size="large"
+          >
             See more
           </SeeMoreButton>
         </SectionContainer>
