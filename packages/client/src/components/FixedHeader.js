@@ -36,9 +36,11 @@ export function FixedHeader() {
     <S.AppBarWrapper>
       <AppBar color="inherit" position="fixed" elevation={2}>
         <S.Toolbar>
-          <Button color="primary" component={RouterLink} to="/discover">
-            Discover Campaigns
-          </Button>
+          <Box display="flex">
+            <Button color="primary" component={RouterLink} to="/discover">
+              Discover Campaigns
+            </Button>
+          </Box>
           <S.LogoImageWrapper component={RouterLink} to="/">
             <S.LogoImage component="img" src={headerLogo} />
           </S.LogoImageWrapper>
@@ -84,8 +86,9 @@ export function FixedHeader() {
                   open={open}
                   onClose={handleClose}
                 >
-                  {/* TODO:  */}
-                  {/* <MenuItem onClick={handleClose}>My campaigns</MenuItem> */}
+                  <MenuItem component={RouterLink} to="/dashboard">
+                    My campaigns
+                  </MenuItem>
                   <MenuItem onClick={logout}>Logout</MenuItem>
                 </Menu>
               </Box>

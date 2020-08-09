@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Box, Grid, Button } from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
+import { styled } from '@material-ui/styles';
+import { Link as RouterLink } from 'react-router-dom';
 
 import { FixedHeader, Footer } from '../components';
 import { Campaign } from './dashboard/Campaign';
@@ -33,20 +34,6 @@ const SectionTitle = styled(Box)({
   margin: 10,
 });
 
-const CreateButton = styled(Button)({
-  marginTop: 24,
-  marginLeft: 10,
-  padding: 12,
-  paddingLeft: 20,
-  paddingRight: 20,
-  fontWeight: 'bold',
-  textTransform: 'none',
-  fontSize: 14,
-  backgroundColor: '#D81B60',
-  color: '#FFFFFF',
-  alignSelf: 'flex-start',
-});
-
 export const Dashboard = () => {
   return (
     <Box>
@@ -59,7 +46,17 @@ export const Dashboard = () => {
           <SectionTitle fontWeight="fontWeightLight" fontSize={24}>
             Here are all your campaigns from the beginning
           </SectionTitle>
-          <CreateButton variant="contained">Create a Campaign</CreateButton>
+          <Box ml={1} mt={3}>
+            <Button
+              color="primary"
+              component={RouterLink}
+              variant="contained"
+              size="large"
+              to="/create"
+            >
+              Create a campaign
+            </Button>
+          </Box>
         </SectionContainer>
       </TopSectionBox>
       <SectionBoxColored>
