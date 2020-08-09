@@ -9,9 +9,9 @@ import { FixedHeader, Footer } from '../components';
 import { Campaign } from './dashboard/Campaign';
 import { createGetOwnerCampaignsEndpoint } from '../constants/api';
 
-const SectionBox = styled(Box)({
-  backgroundColor: 'transparent',
-});
+// const SectionBox = styled(Box)({
+//   backgroundColor: 'transparent',
+// });
 
 const SectionBoxColored = styled(Box)({
   backgroundColor: '#F8F5F6',
