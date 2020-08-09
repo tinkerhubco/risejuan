@@ -28,7 +28,7 @@ import { FixedHeader } from '../components';
 
 import { fetcher } from '../utils/fetcher';
 import { tryCatch } from '../utils/tryCatch';
-import { CREATE_CAMPAIGN_URL } from '../constants/api';
+import { CREATE_CAMPAIGN_ENDPOINT } from '../constants/api';
 import {
   ATTACHMENT_DOCUMENT_TYPE,
   ATTACHMENT_COVER_PHOTO_TYPE,
@@ -56,7 +56,7 @@ function getStepContent({
             margin="normal"
             InputProps={{
               startAdornment: (
-                <InputAdornment position="start">$</InputAdornment>
+                <InputAdornment position="start">₱</InputAdornment>
               ),
             }}
             type="number"
@@ -216,7 +216,7 @@ export function CreateCampaign() {
     };
 
     return tryCatch(() =>
-      fetcher(CREATE_CAMPAIGN_URL, {
+      fetcher(CREATE_CAMPAIGN_ENDPOINT, {
         method: 'POST',
         body: JSON.stringify(campaignPayload),
         headers: {

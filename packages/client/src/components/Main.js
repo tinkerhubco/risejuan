@@ -1,5 +1,7 @@
-import { Box, styled } from '@material-ui/core';
+import React from 'react';
 
-export const Main = styled(Box)({
-  height: '100%',
-});
+import { Box } from '@material-ui/core';
+
+export const Main = (props) => (
+  <Box component="main" height="100%" {...props} />
+);
