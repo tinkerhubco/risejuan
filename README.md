@@ -2,6 +2,8 @@
 
 **Rise Juan** is a fundraising platform that focuses on helping different communities through donations from local businesses. Donors can donate to local businesses to help raise funds for their campaign in helping communities in need.
 
+https://risejuan.tinkerhub.dev
+
 ## 📝 Abstract
 Small businesses—the so-called micro, small and medium enterprises (MSMEs) account for **99.6 percent** of the nearly one million businesses in the country. They employ **61.6 percent** of the total number of employed.
 
@@ -60,7 +62,7 @@ This is where Rise Juan comes in. Rise Juan creates an opportunity for small bus
 
 - Infrastructure:
   - Frontend: Vercel Now
-  - Backend: AWS EC2
+  - Backend: DigitalOcean
   - Storage bucket: Filestack
 
 ## 🤝 Contributing
