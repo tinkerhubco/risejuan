@@ -2,6 +2,21 @@
 
 **Rise Juan** is a fundraising platform that focuses on helping different communities through donations from local businesses. Donors can donate to local businesses to help raise funds for their campaign in helping communities in need.
 
+## 📝 Abstract
+Small businesses—the so-called micro, small and medium enterprises (MSMEs) account for **99.6 percent** of the nearly one million businesses in the country. They employ **61.6 percent** of the total number of employed.
+
+> Small businesses are one of the hardest-hit sectors by the coronavirus crisis. <br />- Jorge Wieneke, co-founder of the Association of Filipino Franchisers Inc (AFFI)
+
+In the past few months, a lot of small businesses were struggling to produce an income due to the lack of customers because of the quarantine/lockdown. As a result, business owners have struggled paying for their employees resulting in a lot of Filipinos getting laid off. 
+
+The PH Government created a law which is [**Bayanihan Heal as One Act**](https://en.wikipedia.org/wiki/Bayanihan_to_Heal_as_One_Act#:~:text=The%20Bayanihan%20to%20Heal%20as,19%20pandemic%20in%20the%20Philippines.) granting the President additional authority to combat the COVID-19 pandemic in the Philippines. However, There is no scheme under the **Bayanihan Heal as One Act** to help small businesses, which make up **99.6 percent** of all enterprises. 
+
+This is where Rise Juan comes in. Rise Juan creates an opportunity for small businesses to make an income through campaigns. Businesses can create a campaign that helps communities and groups by offering their own products which will be funded by the donors. 
+
+**References:**
+- https://manilastandard.net/mobile/article/320488
+- https://rappler.com/newsbreak/in-depth/heavy-impact-coronavirus-lockdown-micro-small-medium-enterprises
+
 ## 🤔 How it works:
 
 1. **Businesses** creates a **campaign** to donate their products to their **community** of choice.
@@ -62,4 +77,4 @@ Give a ⭐️ if this project helped you!
 
 Copyright © 2020 [Tinkerhub](https://github.com/tinker-hub).
 
-This project is [ISC](hhttps://github.com/tinker-hub/risejuan/blob/master/LICENSE) licensed.
+This project is [MIT](https://github.com/tinker-hub/risejuan/blob/master/LICENSE) licensed.
