@@ -32,6 +32,12 @@ export function FixedHeader() {
     setAnchorEl(null);
   };
 
+  const handleLogoutClick = () => {
+    logout({
+      returnTo: window.location.origin,
+    });
+  };
+
   return (
     <S.AppBarWrapper>
       <AppBar color="inherit" position="fixed" elevation={2}>
@@ -89,7 +95,7 @@ export function FixedHeader() {
                   <MenuItem component={RouterLink} to="/dashboard">
                     My campaigns
                   </MenuItem>
-                  <MenuItem onClick={logout}>Logout</MenuItem>
+                  <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
                 </Menu>
               </Box>
             )}
