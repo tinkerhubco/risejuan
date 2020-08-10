@@ -1,7 +1,4 @@
 {
-  "api": {
-    "port": 80
-  },
   "database": {
     "name": "risejuan-dev",
     "username": "risejuan-dev",
