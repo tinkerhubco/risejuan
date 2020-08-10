@@ -11,6 +11,14 @@ import {
   Paper,
   Button,
   LinearProgress,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  TextField,
+  DialogActions,
+  InputAdornment,
+  Checkbox,
+  FormControlLabel,
 } from '@material-ui/core';
 import {
   Timeline,
@@ -23,28 +31,54 @@ import {
 import {
   Report as ReportIcon,
   PersonOutline as PersonOutlineIcon,
+  CheckCircle as CheckCircleIcon,
 } from '@material-ui/icons';
-import { format } from 'date-fns';
+import { format, formatDistanceToNow } from 'date-fns';
 import { useParams } from 'react-router-dom';
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
+import { useFormik } from 'formik';
 
 import {
   createGetCampaignEndpoint,
   ATTACHMENT_COVER_PHOTO_TYPE,
+  createDonateEndpoint,
 } from '../constants';
 import { FixedHeader, Main } from '../components';
-import { getProgressValue, formatNumberToAmountString } from '../utils';
+import {
+  getProgressValue,
+  formatNumberToAmountString,
+  tryCatch,
+  fetcher,
+} from '../utils';
 
 export const CampaignDetails = () => {
   const params = useParams();
 
   const campaignId = params['campaignId'];
 
-  const { data: campaign, error } = useSWR(
-    createGetCampaignEndpoint({ campaignId }),
-  );
+  const getCampaignKey = createGetCampaignEndpoint({ campaignId });
+
+  const { data: campaign, error } = useSWR(getCampaignKey);
 
   const isLoading = !campaign && !error;
+
+  const [open, setOpen] = React.useState(false);
+  const [donateSuccess, setDonateSuccess] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setDonateSuccess(false);
+  };
+
+  const { handleChange, values, resetForm } = useFormik({
+    initialValues: {
+      isAnonymous: false,
+    },
+  });
 
   if (isLoading) {
     return <Box>Loading...</Box>;
@@ -81,6 +115,28 @@ export const CampaignDetails = () => {
   const donors = campaign.donors;
 
   const donorsCount = donors.length;
+
+  const handleDonateButtonClick = async () => {
+    await tryCatch(() =>
+      fetcher(createDonateEndpoint({ campaignId }), {
+        method: 'POST',
+        body: JSON.stringify({
+          amount: values['donationAmount'],
+          name: values['donorName'],
+          isAnonymous: values['isAnonymous'],
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+    );
+
+    mutate(getCampaignKey);
+
+    resetForm();
+
+    setDonateSuccess(true);
+  };
 
   return (
     <>
@@ -208,6 +264,7 @@ export const CampaignDetails = () => {
                     color="primary"
                     variant="contained"
                     size="large"
+                    onClick={handleClickOpen}
                   >
                     Donate now
                   </Button>
@@ -216,6 +273,7 @@ export const CampaignDetails = () => {
                     color="primary"
                     variant="outlined"
                     size="large"
+                    onClick={() => alert('WIP')}
                   >
                     Share
                   </S.ShareButton>
@@ -232,16 +290,21 @@ export const CampaignDetails = () => {
                             <S.PersonOutlineIcon fontSize="large" />
                             <Box display="flex" flexDirection="column">
                               <Typography variant="subtitle1">
-                                John Doroy
+                                {donor.isAnonymous ? 'Anonymous' : donor.name}
                               </Typography>
                               <Box display="flex">
                                 <Typography variant="subtitle2">
-                                  ₱1000&nbsp;
+                                  ₱{formatNumberToAmountString(donor.amount)}
+                                  &nbsp;
                                   <S.DonationDateDistance
                                     component="span"
                                     variant="subtitle2"
                                   >
-                                    - 2 mos
+                                    -&nbsp;
+                                    {formatDistanceToNow(
+                                      new Date(donor.createdDate),
+                                    )}
+                                    &nbsp;
                                   </S.DonationDateDistance>
                                 </Typography>
                               </Box>
@@ -262,6 +325,84 @@ export const CampaignDetails = () => {
           </Grid>
         </Container>
       </Main>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+        fullWidth
+      >
+        <DialogTitle id="form-dialog-title">
+          {donateSuccess ? 'Success' : 'Donate'}
+        </DialogTitle>
+        <DialogContent>
+          {donateSuccess ? (
+            <Box
+              alignItems="center"
+              display="flex"
+              flexDirection="column"
+              p={10}
+            >
+              <S.CheckCircleIcon color="primary" fontSize="large" />
+              <S.SuccessText>
+                Success! Thank you for your donation.
+              </S.SuccessText>
+              {/* TODO: go to my campaigns */}
+            </Box>
+          ) : (
+            <>
+              <TextField
+                fullWidth
+                name="donationAmount"
+                label="Donation amount"
+                margin="normal"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">₱</InputAdornment>
+                  ),
+                }}
+                type="number"
+                value={values['donationAmount']}
+                variant="filled"
+                onChange={handleChange}
+              />
+              <TextField
+                fullWidth
+                margin="normal"
+                name="donorName"
+                label="Your name"
+                values={values['donorName']}
+                onChange={handleChange}
+              />
+              <S.CheckboxFormControl
+                margin="normal"
+                control={
+                  <Checkbox
+                    checked={values['isAnonymous']}
+                    onChange={handleChange}
+                    name="isAnonymous"
+                    color="primary"
+                  />
+                }
+                label="Donate anonymously"
+              />
+            </>
+          )}
+        </DialogContent>
+        <DialogActions>
+          {!donateSuccess && (
+            <Button
+              onClick={handleDonateButtonClick}
+              color="primary"
+              variant="contained"
+            >
+              Donate now
+            </Button>
+          )}
+          <Button onClick={handleClose} color="primary">
+            {donateSuccess ? 'Close' : 'Cancel'}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
@@ -317,4 +458,13 @@ const S = {
     width: '100%',
     height: '100%',
   }),
+  CheckboxFormControl: styled(FormControlLabel)(({ theme }) => ({
+    marginTop: theme.spacing(2),
+  })),
+  CheckCircleIcon: styled(CheckCircleIcon)({
+    fontSize: '48px',
+  }),
+  SuccessText: styled(Typography)(({ theme }) => ({
+    marginTop: theme.spacing(2),
+  })),
 };
