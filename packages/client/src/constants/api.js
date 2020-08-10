@@ -7,3 +7,6 @@ export const createGetCampaignEndpoint = ({ campaignId }) =>
 
 export const createGetOwnerCampaignsEndpoint = ({ userId }) =>
   `/api/organizer/${userId}/campaigns`;
+
+export const createDonateEndpoint = ({ campaignId }) =>
+  `/api/campaigns/${campaignId}/donors`;
